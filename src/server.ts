@@ -1,6 +1,6 @@
-import app from './app'
+import App from './app'
+import UsersRoute from "./routes/users.route";
 
-const port = process.env.SERVER_PORT || 3003;
-app.listen(port, () => {
-    console.info(`Server ON PORT=${port}`);
-});
+const app = new App([new UsersRoute()]);
+
+app.listen()
