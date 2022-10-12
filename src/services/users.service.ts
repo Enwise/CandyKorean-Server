@@ -34,6 +34,20 @@ class UsersService {
 
         return createUserData;
     }
+
+    public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
+        if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+
+        const findUser: User = await UserEntity.findOne({ where: { login_id: userData.login_id } });
+        if (!findUser) throw new HttpException(409, "User doesn't exist");
+
+        const hashedPassword = await hashSync(userData.password, saltRound);
+        await UserEntity.update(userId, { ...userData, password: hashedPassword });
+
+        const updateUser: User = await UserEntity.findOne({ where: { login_id: userData.login_id } });
+        return updateUser;
+    }
+
 }
 
 export default UsersService;
