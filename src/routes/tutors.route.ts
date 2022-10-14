@@ -13,6 +13,7 @@ class TutorsRoute implements Routes {
 
     private initializeRoutes()  {
         this.router.get(`${this.path}`, this.tutorsController.getTutors);
+        this.router.get(`${this.path}/:id(\\d+)`,this.tutorsController.getTutorById);
     }
 }
 

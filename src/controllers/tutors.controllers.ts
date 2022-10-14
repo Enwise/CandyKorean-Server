@@ -14,6 +14,17 @@ class TutorsController {
             next(error);
         }
     }
+
+    public getTutorById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const tutorId = Number(req.params.id);
+            const findOneTutorData: Tutor = await this.tutorService.findTutorById(tutorId);
+
+            res.status(200).json({data: findOneTutorData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default TutorsController;
