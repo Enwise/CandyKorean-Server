@@ -37,6 +37,18 @@ class TutorsController {
             next(error);
         }
     }
+
+    public updateTutor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const tutorId = Number(req.params.id);
+            const tutorData: CreateTutorDto = req.body;
+            const updateTutorData: Tutor = await this.tutorService.updateTutor(tutorId, tutorData);
+
+            res.status(200).json({data: updateTutorData, message: 'updated'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default TutorsController;

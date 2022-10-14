@@ -42,14 +42,12 @@ class UsersService {
         const findUser: User = await UserEntity.findOne({where: {user_id: userId}});
         if (!findUser) throw new HttpException(409, "User doesn't exist");
 
-        if(isEmpty(userData.password)) {
+        if (isEmpty(userData.password)) {
             await UserEntity.update(userId, {...userData});
         } else {
             const hashedPassword = await hashSync(userData.password, saltRound);
             await UserEntity.update(userId, {...userData, password: hashedPassword});
         }
-
-
 
         const updateUser: User = await UserEntity.findOne({where: {user_id: userId}});
         return updateUser;
@@ -64,7 +62,6 @@ class UsersService {
         await UserEntity.update(userId, {enabled: true});
         return findUser;
     }
-
 }
 
 export default UsersService;

@@ -1,8 +1,8 @@
 import express from "express";
 import cors from 'cors';
-import { Routes } from './interfaces/router.interfaces';
+import {Routes} from './interfaces/router.interfaces';
 import {AppDataSource} from "./config/data-source";
-import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from './config/index';
+import {NODE_ENV, PORT, ORIGIN, CREDENTIALS} from './config/index';
 
 class App {
     public app: express.Application;
@@ -34,29 +34,29 @@ class App {
 
     private connectToDatabase() {
         AppDataSource.initialize()
-            .then(()=>{
+            .then(() => {
                 console.log("DataSource Connect Success!");
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.error("DataSource Connect Error!!");
+                console.log(err)
             })
     }
 
     private initializeMiddlewares() {
-        this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+        this.app.use(cors({origin: ORIGIN, credentials: CREDENTIALS}));
         this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(express.urlencoded({extended: true}));
     }
 
     private initializeRoutes(routes: Routes[]) {
         routes.forEach(route => {
             this.app.use('/apis', route.router);
         });
-        this.app.use('/',((req, res, next) => {
+        this.app.use('/', ((req, res, next) => {
             res.send("Hello World!");
         }))
     }
-
 }
 
 export default App;

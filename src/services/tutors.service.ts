@@ -15,11 +15,11 @@ class TutorsService {
         return tutors
     }
 
-    public async findTutorById(tutorId:number){
-        if(isEmpty(tutorId)) throw new HttpException(400, "TutorId is empty");
+    public async findTutorById(tutorId: number) {
+        if (isEmpty(tutorId)) throw new HttpException(400, "TutorId is empty");
 
-        const findTutor:Tutor = await TutorEntity.findOne({where:{tutor_id:tutorId},relations:{user:true}})
-        if(!findTutor) throw new HttpException(409, "Tutor doesn't exist");
+        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}, relations: {user: true}})
+        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         return findTutor;
     }
@@ -27,13 +27,27 @@ class TutorsService {
     public async createTutor(tutorData: CreateTutorDto): Promise<Tutor> {
         if (isEmpty(tutorData)) throw new HttpException(400, "TutorData is empty");
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {name:tutorData.name}});
+        const findTutor: Tutor = await TutorEntity.findOne({where: {name: tutorData.name}});
         if (findTutor) throw new HttpException(409, `This tutor name ${tutorData.name} already exists`);
 
         const findUser: User = await UserEntity.findOne({where: {user_id: Number(tutorData.user_id)}});
-        const createTutorData: Tutor = await TutorEntity.create({...tutorData,user:findUser}).save();
+        if (findUser) throw new HttpException(409, "User doesn't exist");
+
+        const createTutorData: Tutor = await TutorEntity.create({...tutorData, user: findUser}).save();
 
         return createTutorData
+    }
+
+    public async updateTutor(tutorId: number, tutorData: CreateTutorDto): Promise<Tutor> {
+        if (isEmpty(tutorData)) throw new HttpException(400, "TutorData is empty");
+
+        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}});
+        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
+
+        await TutorEntity.update(tutorId, {...tutorData})
+
+        const updateTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}});
+        return updateTutor;
     }
 }
 
