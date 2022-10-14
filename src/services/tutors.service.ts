@@ -10,7 +10,7 @@ import {UserEntity} from "../entities/users.entity";
 class TutorsService {
     public async findAllTutors(): Promise<Tutor[]> {
         const tutors: Tutor[] = await AppDataSource.getRepository(TutorEntity).find({
-            relations: {user_id: true,}
+            relations: {user: true,}
         })
         return tutors
     }
@@ -18,7 +18,7 @@ class TutorsService {
     public async findTutorById(tutorId:number){
         if(isEmpty(tutorId)) throw new HttpException(400, "TutorId is empty");
 
-        const findTutor:Tutor = await TutorEntity.findOne({where:{tutor_id:tutorId},relations:{user_id:true}})
+        const findTutor:Tutor = await TutorEntity.findOne({where:{tutor_id:tutorId},relations:{user:true}})
         if(!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         return findTutor;
@@ -31,7 +31,7 @@ class TutorsService {
         if (findTutor) throw new HttpException(409, `This tutor name ${tutorData.name} already exists`);
 
         const findUser: User = await UserEntity.findOne({where: {user_id: Number(tutorData.user_id)}});
-        const createTutorData: Tutor = await TutorEntity.create({...tutorData,user_id:findUser});
+        const createTutorData: Tutor = await TutorEntity.create({...tutorData,user:findUser}).save();
 
         return createTutorData
     }

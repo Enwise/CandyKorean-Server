@@ -11,6 +11,6 @@ export class TutorEntity extends BaseEntity implements Tutor {
     name: string
 
     @OneToOne(() => UserEntity)
-    @JoinColumn()
-    user_id: UserEntity
+    @JoinColumn({name:"user_id"})
+    user: UserEntity
 }
