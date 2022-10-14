@@ -49,6 +49,16 @@ class TutorsService {
         const updateTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}});
         return updateTutor;
     }
+
+    public async deleteTutor(tutorId: number): Promise<Tutor> {
+        if (isEmpty(tutorId)) throw new HttpException(400, "TutorId is empty");
+
+        const findTutor: Tutor = await  TutorEntity.findOne({where: {tutor_id:tutorId}});
+        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
+
+        await TutorEntity.update(tutorId,{enabled: true});
+        return findTutor;
+    }
 }
 
 export default TutorsService;

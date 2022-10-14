@@ -8,6 +8,9 @@ export class TutorEntity extends BaseEntity implements Tutor {
     tutor_id: number
 
     @Column()
+    enabled: boolean
+
+    @Column()
     name: string
 
     @OneToOne(() => UserEntity)

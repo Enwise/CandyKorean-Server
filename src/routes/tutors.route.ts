@@ -18,6 +18,7 @@ class TutorsRoute implements Routes {
         this.router.get(`${this.path}/:id(\\d+)`, this.tutorsController.getTutorById);
         this.router.post(`${this.path}`, validationMiddleware(CreateTutorDto, 'body'), this.tutorsController.createTutor);
         this.router.put(`${this.path}/:id(\\d+)`,validationMiddleware(CreateTutorDto,'body'),this.tutorsController.updateTutor);
+        this.router.delete(`${this.path}/:id(\\d+)`,this.tutorsController.deleteTutor);
     }
 }
 
