@@ -14,6 +14,17 @@ class LevelsController {
             next(error);
         }
     }
+
+    public getLevelById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const levelId = Number(req.params.id);
+            const findOneLevelData: Level = await this.levelService.findLevelById(levelId);
+
+            res.status(200).json({data:findOneLevelData, message:'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default LevelsController;

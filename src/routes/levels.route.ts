@@ -13,6 +13,7 @@ class LevelsRoute implements Routes  {
 
     private initializeRoutes(){
         this.router.get(`${this.path}`,this.levelsController.getLevels);
+        this.router.get(`${this.path}/:id(\\d+)`, this.levelsController.getLevelById);
     }
 }
 
