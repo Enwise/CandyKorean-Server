@@ -52,6 +52,8 @@ class LevelsController {
         try {
             const levelId = Number(req.params.id);
             const deleteLevelData: Level = await this.levelService.deleteLevel(levelId);
+
+            res.status(200).json({data: deleteLevelData, message: 'deleted'});
         } catch (error) {
             next(error);
         }

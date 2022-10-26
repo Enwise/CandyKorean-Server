@@ -14,6 +14,17 @@ class CoursesController {
             next(error)
         }
     }
+
+    public getCourseById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const findOneCourseData: Course = await this.courseService.findCourseById(courseId);
+
+            res.status(200).json({data: findOneCourseData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default CoursesController;
