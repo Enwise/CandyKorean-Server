@@ -12,6 +12,9 @@ export class LevelEntity extends BaseEntity implements Level {
     name: string
 
     @Column()
+    enabled: boolean
+
+    @Column()
     info: string
 
     @ManyToOne(() => TutorEntity, (tutor) => tutor.levels)

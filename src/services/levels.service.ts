@@ -48,6 +48,17 @@ class LevelsService {
 
         return updateLevel;
     }
+
+    public async deleteLevel(levelId: number): Promise<Level> {
+        if (isEmpty(levelId)) throw new HttpException(400, "Level is empty");
+
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
+        if (!findLevel) throw new HttpException(409, "Level doesn't exist");
+
+        await LevelEntity.update(levelId, {enabled: true});
+
+        return findLevel;
+    }
 }
 
 export default LevelsService;

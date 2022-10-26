@@ -47,6 +47,15 @@ class LevelsController {
             next(error);
         }
     }
+
+    public deleteLevel = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const levelId = Number(req.params.id);
+            const deleteLevelData: Level = await this.levelService.deleteLevel(levelId);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default LevelsController;
