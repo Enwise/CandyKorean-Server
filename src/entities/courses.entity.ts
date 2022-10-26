@@ -4,7 +4,7 @@ import {Level} from "../interfaces/levels.interfaces";
 import {LevelEntity} from "./levels.entity";
 
 @Entity('course')
-export class CoursesEntity extends BaseEntity implements Course{
+export class CoursesEntity extends BaseEntity implements Course {
     @PrimaryGeneratedColumn()
     course_id: number
 
@@ -29,6 +29,6 @@ export class CoursesEntity extends BaseEntity implements Course{
     @Column()
     date_updated: Date
 
-    @ManyToOne(()=>LevelEntity, (level)=>level.courses)
+    @ManyToOne(() => LevelEntity, (level) => level.courses)
     level: Level
 }
