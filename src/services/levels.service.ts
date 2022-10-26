@@ -1,6 +1,6 @@
 import {Level} from "../interfaces/levels.interfaces";
 import {AppDataSource} from "../config/data-source";
-import {LevelEntity} from "../entities/level.entity";
+import {LevelEntity} from "../entities/levels.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateLevelDto} from "../dtos/levels.dto";
