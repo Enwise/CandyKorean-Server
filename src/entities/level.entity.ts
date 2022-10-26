@@ -14,6 +14,6 @@ export class LevelEntity extends BaseEntity implements Level {
     @Column()
     info: string
 
-    @ManyToOne(()=>TutorEntity, (tutor) => tutor.levels )
+    @ManyToOne(() => TutorEntity, (tutor) => tutor.levels)
     tutor: Tutor
 }
