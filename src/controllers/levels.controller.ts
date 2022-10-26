@@ -37,6 +37,16 @@ class LevelsController {
             next(error);
         }
     }
+
+    public updateLevel = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const levelId = Number(req.params.id);
+            const levelData: CreateLevelDto = req.body;
+            const updateLevelData: Level = await this.levelService.updateLevel(levelId, levelData);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default LevelsController;

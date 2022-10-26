@@ -25,7 +25,7 @@ class LevelsService {
     public async createLevel(levelData: CreateLevelDto): Promise<Level> {
         if (isEmpty(levelData)) throw new HttpException(400, "LevelData is empty");
 
-        const findLevel: Level = await LevelEntity.findOne({where:{name:levelData.name}});
+        const findLevel: Level = await LevelEntity.findOne({where: {name: levelData.name}});
         if (findLevel) throw new HttpException(409, `this level name ${levelData.name} already exists`);
 
         const findTutor: Tutor = await TutorEntity.findOne({where: {name: levelData.tutor_id}});
@@ -34,6 +34,19 @@ class LevelsService {
         const createLevelData: Level = await LevelEntity.create({...levelData, tutor: findTutor}).save();
 
         return createLevelData;
+    }
+
+    public async updateLevel(levelId: number, levelData: CreateLevelDto): Promise<Level> {
+        if (isEmpty(levelData)) throw new HttpException(400, "LevelData is empty");
+
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
+        if (!findLevel) throw new HttpException(409, "Level doesn't exist");
+
+        await LevelEntity.update(levelId, {...levelData});
+
+        const updateLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
+
+        return updateLevel;
     }
 }
 

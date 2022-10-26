@@ -17,6 +17,7 @@ class LevelsRoute implements Routes {
         this.router.get(`${this.path}`, this.levelsController.getLevels);
         this.router.get(`${this.path}/:id(\\d+)`, this.levelsController.getLevelById);
         this.router.post(`${this.path}`, validationMiddleware(CreateLevelDto), this.levelsController.createLevel);
+        this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateLevelDto), this.levelsController.updateLevel);
     }
 }
 
