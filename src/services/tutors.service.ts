@@ -35,7 +35,7 @@ class TutorsService {
 
         const createTutorData: Tutor = await TutorEntity.create({...tutorData, user: findUser}).save();
 
-        return createTutorData
+        return createTutorData;
     }
 
     public async updateTutor(tutorId: number, tutorData: CreateTutorDto): Promise<Tutor> {
