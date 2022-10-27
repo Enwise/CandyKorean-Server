@@ -28,10 +28,10 @@ class TutorsService {
         if (isEmpty(tutorData)) throw new HttpException(400, "TutorData is empty");
 
         const findTutor: Tutor = await TutorEntity.findOne({where: {name: tutorData.name}});
-        if (findTutor) throw new HttpException(409, `This tutor name ${tutorData.name} already exists`);
+        if (!findTutor) throw new HttpException(409, `This tutor name ${tutorData.name} already exists`);
 
         const findUser: User = await UserEntity.findOne({where: {user_id: Number(tutorData.user_id)}});
-        if (findUser) throw new HttpException(409, "User doesn't exist");
+        if (!findUser) throw new HttpException(409, "User doesn't exist");
 
         const createTutorData: Tutor = await TutorEntity.create({...tutorData, user: findUser}).save();
 
