@@ -43,6 +43,8 @@ class LevelsController {
             const levelId = Number(req.params.id);
             const levelData: CreateLevelDto = req.body;
             const updateLevelData: Level = await this.levelService.updateLevel(levelId, levelData);
+
+            res.status(200).json({data: updateLevelData, message: 'updated'});
         } catch (error) {
             next(error);
         }
