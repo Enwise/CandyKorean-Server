@@ -37,6 +37,18 @@ class CoursesController {
             next(error);
         }
     }
+
+    public updateCourse = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const courseData: CreateCourseDto = req.body;
+            const updateCourseData: Course = await this.courseService.updateCourse(courseId, courseData);
+
+            res.status(200).json({data: updateCourseData, message: 'updated'});
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default CoursesController;

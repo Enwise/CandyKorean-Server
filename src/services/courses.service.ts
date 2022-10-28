@@ -35,6 +35,19 @@ class CoursesService {
 
         return createCourseData;
     }
+
+    public async updateCourse(courseId: number, courseData: CreateCourseDto): Promise<Course> {
+        if (isEmpty(courseId)) throw new HttpException(400,"CourseData is emtpy");
+
+        const findCourse: Course = await CourseEntity.findOne({where:{course_id: courseId}});
+        if (!findCourse) throw new HttpException(409,"Course doesn't exist");
+
+        await CourseEntity.update(courseId, {...courseData});
+
+        const updateCourse: Course = await CourseEntity.findOne({where:{course_id: courseId}});
+
+        return updateCourse;
+    }
 }
 
 export default CoursesService;
