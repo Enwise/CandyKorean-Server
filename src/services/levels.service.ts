@@ -1,6 +1,6 @@
 import {Level} from "../interfaces/levels.interfaces";
 import {AppDataSource} from "../config/data-source";
-import {LevelEntity} from "../entities/level.entity";
+import {LevelEntity} from "../entities/levels.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateLevelDto} from "../dtos/levels.dto";
@@ -26,10 +26,10 @@ class LevelsService {
         if (isEmpty(levelData)) throw new HttpException(400, "LevelData is empty");
 
         const findLevel: Level = await LevelEntity.findOne({where: {name: levelData.name}});
-        if (findLevel) throw new HttpException(409, `this level name ${levelData.name} already exists`);
+        if (!findLevel) throw new HttpException(409, `this level name ${levelData.name} already exists`);
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {name: levelData.tutor_id}});
-        if (findTutor) throw new HttpException(409, "Tutor doesn't exist");
+        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(levelData.tutor_id)}});
+        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         const createLevelData: Level = await LevelEntity.create({...levelData, tutor: findTutor}).save();
 

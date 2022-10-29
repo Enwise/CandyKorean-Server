@@ -1,7 +1,7 @@
 import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Level} from "../interfaces/levels.interfaces";
 import {TutorEntity} from "./tutors.entity";
-import {Tutor} from "../interfaces/tutors.interface";
+import {CourseEntity} from "./course.entity";
 
 @Entity('level')
 export class LevelEntity extends BaseEntity implements Level {
@@ -18,5 +18,8 @@ export class LevelEntity extends BaseEntity implements Level {
     info: string
 
     @ManyToOne(() => TutorEntity, (tutor) => tutor.levels)
-    tutor: Tutor
+    tutor: TutorEntity
+
+    @OneToMany(() => CourseEntity, (course) => course.level)
+    courses: CourseEntity[]
 }
