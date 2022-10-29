@@ -22,31 +22,42 @@ class CoursesService {
         return findCourse;
     }
 
-    public async createCourse(courseData: CreateCourseDto): Promise<Course>{
+    public async createCourse(courseData: CreateCourseDto): Promise<Course> {
         if (isEmpty(courseData)) throw new HttpException(400, "CourseData is empty");
 
-        const findCourse: Course = await CourseEntity.findOne({where:{name:courseData.name}});
+        const findCourse: Course = await CourseEntity.findOne({where: {name: courseData.name}});
         if (!findCourse) throw new HttpException(409, `this course name ${courseData.name} already exists`);
 
-        const findLevel: Level = await  LevelEntity.findOne({where:{level_id:Number(courseData.level_id)}});
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: Number(courseData.level_id)}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
-        const createCourseData:Course = await CourseEntity.create({...courseData, level:findLevel}).save();
+        const createCourseData: Course = await CourseEntity.create({...courseData, level: findLevel}).save();
 
         return createCourseData;
     }
 
     public async updateCourse(courseId: number, courseData: CreateCourseDto): Promise<Course> {
-        if (isEmpty(courseId)) throw new HttpException(400,"CourseData is emtpy");
+        if (isEmpty(courseId)) throw new HttpException(400, "CourseData is emtpy");
 
-        const findCourse: Course = await CourseEntity.findOne({where:{course_id: courseId}});
-        if (!findCourse) throw new HttpException(409,"Course doesn't exist");
+        const findCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
+        if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
         await CourseEntity.update(courseId, {...courseData});
 
-        const updateCourse: Course = await CourseEntity.findOne({where:{course_id: courseId}});
+        const updateCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
 
         return updateCourse;
+    }
+
+    public async deleteCourse(courseId: number): Promise<Course> {
+        if (isEmpty(courseId)) throw new HttpException(400, "Course is empty");
+
+        const findCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
+        if (!findCourse) throw new HttpException(409, "Course doesn't exist");
+
+        await CourseEntity.delete(courseId);
+
+        return findCourse;
     }
 }
 

@@ -49,6 +49,17 @@ class CoursesController {
             next(error)
         }
     }
+
+    public deleteCourse = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const deleteCourseData: Course = await this.courseService.deleteCourse(courseId);
+
+            res.status(200).json({data: deleteCourseData, message: 'deleted'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default CoursesController;

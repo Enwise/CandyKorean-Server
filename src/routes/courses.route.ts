@@ -19,6 +19,7 @@ class CoursesRoute implements Routes {
         this.router.get(`${this.path}/:id(\\d+)`, this.courseController.getCourseById);
         this.router.post(`${this.path}`, validationMiddleware(CreateCourseDto), this.courseController.createCourse);
         this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateCourseDto), this.courseController.updateCourse);
+        this.router.delete(`${this.path}/:id(\\d+)`, this.courseController.deleteCourse);
     }
 
 }
