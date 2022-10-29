@@ -13,6 +13,7 @@ class ClassesRoute implements Routes {
 
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.classesController.getClasses);
+        this.router.get(`${this.path}/:id(\\d+)`, this.classesController.getClassById);
     }
 }
 
