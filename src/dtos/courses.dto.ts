@@ -1,10 +1,10 @@
-import {IsString} from "class-validator";
+import {IsNumber, IsString} from "class-validator";
 
 export class CreateCourseDto {
     @IsString()
     public name: string
 
-    @IsString()
+    @IsNumber()
     public price: number
 
     @IsString()
@@ -13,7 +13,7 @@ export class CreateCourseDto {
     @IsString()
     public category: string
 
-    @IsString()
+    @IsNumber()
     public view_count: number
 
     @IsString()

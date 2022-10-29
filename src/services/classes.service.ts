@@ -3,20 +3,37 @@ import {AppDataSource} from "../config/data-source";
 import {ClassesEntity} from "../entities/classes.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
+import {CreateClassesDto} from "../dtos/classes.dto";
+import {Course} from "../interfaces/courses.interface";
+import {CourseEntity} from "../entities/courses.entity";
 
 class ClassesService {
-    public async findAllClasses(): Promise<Class[]>{
+    public async findAllClasses(): Promise<Class[]> {
         const classes: Class[] = await AppDataSource.getRepository(ClassesEntity).find({});
         return classes;
     }
 
-    public async findClassesById(classId: number): Promise<Class>{
+    public async findClassesById(classId: number): Promise<Class> {
         if (isEmpty(classId)) throw new HttpException(400, "classId is empty");
 
         const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}})
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
         return findClass;
+    }
+
+    public async createClass(classData: CreateClassesDto): Promise<Class> {
+        if (isEmpty(classData)) throw new HttpException(400, "ClassData is empty");
+
+        const findClass: Class = await ClassesEntity.findOne({where: {name: classData.name}});
+        if (findClass) throw new HttpException(409, `this class name ${classData.name} already exists`);
+
+        const findCourse: Course = await CourseEntity.findOne({where: {course_id: classData.course_id}});
+        if (!findCourse) throw new HttpException(409, "Course doen't exist");
+
+        const createClassesData: Class = await ClassesEntity.create({...classData, course:findCourse});
+
+        return  createClassesData;
     }
 }
 

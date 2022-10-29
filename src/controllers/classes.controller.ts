@@ -1,6 +1,7 @@
 import ClassesService from "../services/classes.service";
 import {NextFunction, Request, Response} from "express";
 import {Class} from "../interfaces/classes.interface";
+import {CreateClassesDto} from "../dtos/classes.dto";
 
 class ClassesController {
     public classesService = new ClassesService();
@@ -21,6 +22,17 @@ class ClassesController {
             const findOneClassData: Class = await this.classesService.findClassesById(classId);
 
             res.status(200).json({data: findOneClassData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public createClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const classData: CreateClassesDto = req.body;
+            const createClassData: Class = await this.classesService.createClass(classData);
+
+            res.status(201).json({data: createClassData, message: 'created'});
         } catch (error) {
             next(error);
         }
