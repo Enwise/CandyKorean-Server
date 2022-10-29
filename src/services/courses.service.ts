@@ -1,6 +1,6 @@
 import {Course} from "../interfaces/courses.interface";
 import {AppDataSource} from "../config/data-source";
-import {CourseEntity} from "../entities/course.entity";
+import {CourseEntity} from "../entities/courses.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateCourseDto} from "../dtos/courses.dto";
