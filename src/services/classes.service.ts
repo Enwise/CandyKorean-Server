@@ -35,6 +35,19 @@ class ClassesService {
 
         return  createClassesData;
     }
+
+    public async updateClass(classId: number, classData: CreateClassesDto): Promise<Class> {
+        if (isEmpty(classId)) throw new HttpException(400, "Class is empty");
+
+        const findClass: Class = await ClassesEntity.findOne({where:{class_id:classId}});
+        if (!findClass) throw new HttpException(409, "Class doesn't exist");
+
+        await ClassesEntity.update(classId, {...classData});
+
+        const updateClass: Class = await ClassesEntity.findOne({where:{class_id:classId}});
+
+        return updateClass;
+    }
 }
 
 export default ClassesService;

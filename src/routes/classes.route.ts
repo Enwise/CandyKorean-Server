@@ -17,6 +17,7 @@ class ClassesRoute implements Routes {
         this.router.get(`${this.path}`, this.classesController.getClasses);
         this.router.get(`${this.path}/:id(\\d+)`, this.classesController.getClassById);
         this.router.post(`${this.path}`, validationMiddleware(CreateClassesDto), this.classesController.createClass);
+        this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateClassesDto), this.classesController.updateClass);
     }
 }
 

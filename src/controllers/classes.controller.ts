@@ -2,6 +2,8 @@ import ClassesService from "../services/classes.service";
 import {NextFunction, Request, Response} from "express";
 import {Class} from "../interfaces/classes.interface";
 import {CreateClassesDto} from "../dtos/classes.dto";
+import {CreateCourseDto} from "../dtos/courses.dto";
+import {Course} from "../interfaces/courses.interface";
 
 class ClassesController {
     public classesService = new ClassesService();
@@ -10,7 +12,7 @@ class ClassesController {
         try {
             const findAllClassesData: Class[] = await this.classesService.findAllClasses();
 
-            res.status(200).json({data:findAllClassesData, message:'findAll'});
+            res.status(200).json({data: findAllClassesData, message: 'findAll'});
         } catch (error) {
             next(error);
         }
@@ -35,6 +37,18 @@ class ClassesController {
             res.status(201).json({data: createClassData, message: 'created'});
         } catch (error) {
             next(error);
+        }
+    }
+
+    public updateClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const classId = Number(req.params.id);
+            const classData: CreateClassesDto = req.body;
+            const updateClassData: Class = await this.classesService.updateClass(classId, classData);
+
+            res.status(200).json({data: updateClassData, message: 'updated'});
+        } catch (error) {
+            next(error)
         }
     }
 }
