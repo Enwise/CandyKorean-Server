@@ -48,6 +48,17 @@ class ClassesService {
 
         return updateClass;
     }
+
+    public async deleteClass(classId: number): Promise<Class> {
+        if (isEmpty(classId)) throw new HttpException(400, "Class is empty");
+
+        const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}});
+        if (!findClass) throw new HttpException(409, "Class doesn't exist");
+
+        await CourseEntity.delete(classId);
+
+        return findClass;
+    }
 }
 
 export default ClassesService;
