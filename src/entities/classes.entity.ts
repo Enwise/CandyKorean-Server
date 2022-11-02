@@ -3,12 +3,13 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToOne,
+    ManyToOne, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Class} from "../interfaces/classes.interface";
 import {CourseEntity} from "./courses.entity";
+import {ContentsEntity} from "./contents.entity";
 
 @Entity('class')
 export class ClassesEntity extends BaseEntity implements Class {
@@ -26,4 +27,7 @@ export class ClassesEntity extends BaseEntity implements Class {
 
     @ManyToOne(()=>CourseEntity, (course)=>course.classes)
     course: CourseEntity;
+
+    @OneToMany(()=>ContentsEntity, (contents)=>contents.class_id)
+    contents: ContentsEntity[];
 }
