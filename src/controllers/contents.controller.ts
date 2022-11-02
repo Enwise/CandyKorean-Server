@@ -14,6 +14,17 @@ class ContentsController {
             next(error);
         }
     }
+
+    public getContentById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const contentId = Number(req.params.id);
+            const findOneContentData: Content = await this.contentsService.findContentById(contentId);
+
+            res.status(200).json({data: findOneContentData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default ContentsController;
