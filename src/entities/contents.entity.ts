@@ -16,6 +16,9 @@ export class ContentsEntity extends BaseEntity implements Content{
     content_id: number
 
     @Column()
+    name: string
+
+    @Column()
     video_url: string
 
     @Column()
