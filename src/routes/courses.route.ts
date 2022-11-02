@@ -2,7 +2,6 @@ import {Routes} from "../interfaces/router.interfaces";
 import {Router} from "express";
 import CoursesController from "../controllers/courses.controller";
 import validationMiddleware from "../middlewares/validation.middleware";
-import {CreateLevelDto} from "../dtos/levels.dto";
 import {CreateCourseDto} from "../dtos/courses.dto";
 
 class CoursesRoute implements Routes {

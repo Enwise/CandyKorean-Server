@@ -1,7 +1,7 @@
 import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Level} from "../interfaces/levels.interfaces";
 import {TutorEntity} from "./tutors.entity";
-import {CourseEntity} from "./course.entity";
+import {CourseEntity} from "./courses.entity";
 
 @Entity('level')
 export class LevelEntity extends BaseEntity implements Level {

@@ -3,12 +3,13 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToOne,
+    ManyToOne, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Course} from "../interfaces/courses.interface";
 import {LevelEntity} from "./levels.entity";
+import {ClassesEntity} from "./classes.entity";
 
 @Entity('course')
 export class CourseEntity extends BaseEntity implements Course {
@@ -38,4 +39,7 @@ export class CourseEntity extends BaseEntity implements Course {
 
     @ManyToOne(() => LevelEntity, (level) => level.courses)
     level: LevelEntity
+
+    @OneToMany(()=>ClassesEntity,(classes)=>classes.course)
+    classes: ClassesEntity[]
 }
