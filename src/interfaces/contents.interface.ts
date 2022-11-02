@@ -10,5 +10,5 @@ export interface Content {
     length: number,
     date_created: Date,
     date_updated: Date,
-    class_id: Class
+    class_entity: Class
 }

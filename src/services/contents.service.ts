@@ -6,6 +6,7 @@ import {HttpException} from "../exceptions/HttpException";
 import {Class} from "../interfaces/classes.interface";
 import {ClassesEntity} from "../entities/classes.entity";
 import {CreateContentDto} from "../dtos/contents.dto";
+import {CreateClassesDto} from "../dtos/classes.dto";
 
 class ContentsService {
     public async findAllContents(): Promise<Content[]> {
@@ -31,9 +32,22 @@ class ContentsService {
         const findClass: Class = await ClassesEntity.findOne({where: {class_id: contentData.class_id}});
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
-        const createContentData: Content = await ContentsEntity.create({...contentData, class_id:findClass});
+        const createContentData: Content = await ContentsEntity.create({...contentData, class_entity: findClass});
 
-        return  createContentData;
+        return createContentData;
+    }
+
+    public async updateContent(contentId: number, contentData: CreateContentDto): Promise<Content> {
+        if (isEmpty(contentId)) throw new HttpException(400, "Content is empty");
+
+        const findContent: Content = await ContentsEntity.findOne({where: {content_id: contentId}});
+        if (!findContent) throw new HttpException(409, "Content doesn't exist");
+
+        await ContentsEntity.update(contentId, {...contentData});
+
+        const updateContent: Content = await ContentsEntity.findOne({where: {content_id: contentId}});
+
+        return updateContent;
     }
 }
 

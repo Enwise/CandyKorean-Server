@@ -28,6 +28,6 @@ export class ClassesEntity extends BaseEntity implements Class {
     @ManyToOne(()=>CourseEntity, (course)=>course.classes)
     course: CourseEntity;
 
-    @OneToMany(()=>ContentsEntity, (contents)=>contents.class_id)
+    @OneToMany(()=>ContentsEntity, (contents)=>contents.class_entity)
     contents: ContentsEntity[];
 }

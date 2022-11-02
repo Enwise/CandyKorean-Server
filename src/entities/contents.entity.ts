@@ -39,6 +39,6 @@ export class ContentsEntity extends BaseEntity implements Content{
     @UpdateDateColumn()
     date_updated: Date
 
-    @ManyToOne(()=>ClassesEntity, (class_id) => class_id.contents)
-    class_id: ClassesEntity;
+    @ManyToOne(()=>ClassesEntity, (class_entity) => class_entity.contents)
+    class_entity: ClassesEntity;
 }

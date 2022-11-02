@@ -17,6 +17,7 @@ class ContentsRoute implements Routes {
         this.router.get(`${this.path}`, this.contentsController.getContents);
         this.router.get(`${this.path}/:id(\\d+)`, this.contentsController.getContentById);
         this.router.post(`${this.path}`, validationMiddleware(CreateContentDto), this.contentsController.createContent);
+        this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateContentDto), this.contentsController.updateContent);
     }
 }
 

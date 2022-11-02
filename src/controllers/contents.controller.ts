@@ -2,6 +2,8 @@ import ContentsService from "../services/contents.service";
 import {NextFunction, Request, Response} from "express";
 import {Content} from "../interfaces/contents.interface";
 import {CreateContentDto} from "../dtos/contents.dto";
+import {CreateClassesDto} from "../dtos/classes.dto";
+import {Class} from "../interfaces/classes.interface";
 
 class ContentsController {
     public contentsService = new ContentsService();
@@ -35,6 +37,18 @@ class ContentsController {
             res.status(201).json({data: createContentData, message: 'created'});
         } catch (error) {
             next(error);
+        }
+    }
+
+    public updateContent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const contentId = Number(req.params.id);
+            const contentData: CreateContentDto = req.body;
+            const updateContentData: Content = await this.contentsService.updateContent(contentId, contentData);
+
+            res.status(200).json({data: updateContentData, message: 'updated'});
+        } catch (error) {
+            next(error)
         }
     }
 }
