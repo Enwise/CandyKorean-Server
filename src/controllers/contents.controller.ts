@@ -2,8 +2,6 @@ import ContentsService from "../services/contents.service";
 import {NextFunction, Request, Response} from "express";
 import {Content} from "../interfaces/contents.interface";
 import {CreateContentDto} from "../dtos/contents.dto";
-import {CreateClassesDto} from "../dtos/classes.dto";
-import {Class} from "../interfaces/classes.interface";
 
 class ContentsController {
     public contentsService = new ContentsService();
@@ -49,6 +47,17 @@ class ContentsController {
             res.status(200).json({data: updateContentData, message: 'updated'});
         } catch (error) {
             next(error)
+        }
+    }
+
+    public deleteContent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const contentId = Number(req.params.id);
+            const deleteContentData: Content = await this.contentsService.deleteContent(contentId);
+
+            res.status(200).json({data: deleteContentData, message: 'deleted'});
+        } catch (error) {
+            next(error);
         }
     }
 }
