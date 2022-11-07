@@ -4,6 +4,9 @@ import {CreateUserDto} from "../dtos/users.dto";
 import {User} from "../interfaces/users.interface";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
+import {DataStoredInToken, TokenData} from "../interfaces/auth.interface";
+import {JWT_SECRET_KEY} from "../config";
+import {sign} from "jsonwebtoken";
 
 class AuthService{
     public async signup(userData: CreateUserDto): Promise<User>{
@@ -17,7 +20,7 @@ class AuthService{
         return createUserData;
     }
 
-    public async login(userData: CreateUserDto): Promise<{ findUser: User; tokenData: string }>{
+    public async login(userData: CreateUserDto): Promise<{ findUser: User; tokenData: TokenData }>{
         if(isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
         const findUser: User = await UserEntity.findOne({where:{name:userData.name}});
@@ -26,9 +29,17 @@ class AuthService{
         const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
         if (!isPasswordMatching) throw new HttpException(409, "Password not matching");
 
-        const tokenData = String("asdf");
+        const tokenData = this.createToken(findUser);
 
         return { tokenData, findUser };
+    }
+
+    public createToken(user: User): TokenData {
+        const dataStoredInToken: DataStoredInToken = { id: user.user_id };
+        const secretKey: string = JWT_SECRET_KEY;
+        const expiresIn: number = 60 * 60;
+
+        return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
     }
 }
 
