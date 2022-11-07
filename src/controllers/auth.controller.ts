@@ -15,6 +15,17 @@ class AuthController {
             next(error)
         }
     }
+
+    public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userData: CreateUserDto = req.body;
+            const { tokenData, findUser } = await this.authService.login(userData);
+
+            res.status(200).json({ data: findUser, token:tokenData, message: 'login' });
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 
 export default AuthController;
