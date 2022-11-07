@@ -1,5 +1,8 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn} from "typeorm"
 import {User} from "../interfaces/users.interface";
+import {hashSync, compareSync} from "bcrypt"
+
+const saltRound = 10
 
 @Entity('user')
 export class UserEntity extends BaseEntity implements User {

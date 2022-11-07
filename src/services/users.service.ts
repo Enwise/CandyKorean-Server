@@ -4,10 +4,9 @@ import {HttpException} from '../exceptions/HttpException';
 import {User} from "../interfaces/users.interface";
 import {isEmpty} from "../utils/util";
 import {CreateUserDto} from "../dtos/users.dto";
-import {hashSync} from "bcrypt";
+import {hash} from "bcrypt";
 
 const saltRound = 10
-
 
 class UsersService {
     public async findAllUsers(): Promise<User[]> {
@@ -30,7 +29,7 @@ class UsersService {
         const findUser: User = await UserEntity.findOne({where: {login_id: userData.login_id}});
         if (!findUser) throw new HttpException(409, `This email ${userData.login_id} already exists`);
 
-        const hashedPassword = await hashSync(userData.password, saltRound);
+        const hashedPassword = await hash(userData.password, saltRound);
         const createUserData: User = await UserEntity.create({...userData, password: hashedPassword}).save();
 
         return createUserData;
@@ -45,7 +44,7 @@ class UsersService {
         if (isEmpty(userData.password)) {
             await UserEntity.update(userId, {...userData});
         } else {
-            const hashedPassword = await hashSync(userData.password, saltRound);
+            const hashedPassword = await hash(userData.password, saltRound);
             await UserEntity.update(userId, {...userData, password: hashedPassword});
         }
 
