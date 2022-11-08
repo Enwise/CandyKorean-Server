@@ -5,6 +5,7 @@ import LevelsRoute from "./routes/levels.route";
 import CoursesRoute from "./routes/courses.route";
 import ClassesRoute from "./routes/classes.route";
 import ContentsRoute from "./routes/contents.route";
+import AuthRoute from "./routes/auth.route";
 
 const app = new App([
     new UsersRoute(),
@@ -12,7 +13,8 @@ const app = new App([
     new LevelsRoute(),
     new CoursesRoute(),
     new ClassesRoute(),
-    new ContentsRoute()
+    new ContentsRoute(),
+    new AuthRoute()
 ]);
 
 app.listen()
