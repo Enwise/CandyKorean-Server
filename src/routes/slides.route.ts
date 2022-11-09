@@ -1,6 +1,8 @@
 import {Routes} from "../interfaces/router.interfaces";
 import {Router} from "express";
 import SlidesController from "../controllers/slides.controller";
+import validationMiddleware from "../middlewares/validation.middleware";
+import {CreateSlideDto} from "../dtos/slides.dto";
 
 class SlidesRoute implements Routes {
     public path = '/class';
@@ -14,6 +16,7 @@ class SlidesRoute implements Routes {
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.slidesController.getSlides);
         this.router.get(`${this.path}/:id(\\d+)`, this.slidesController.getSlideById);
+        this.router.post(`${this.path}`, validationMiddleware(CreateSlideDto), this.slidesController.createSlide);
     }
 }
 

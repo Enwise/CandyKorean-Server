@@ -1,6 +1,7 @@
 import SlidesService from "../services/slides.service";
 import {NextFunction, Request, Response} from "express";
 import {Slide} from "../interfaces/slides.interface";
+import {CreateSlideDto} from "../dtos/slides.dto";
 
 class SlidesController {
     public slidesService = new SlidesService();
@@ -21,6 +22,17 @@ class SlidesController {
             const findOneSlideData: Slide = await this.slidesService.findSlideById(slideId);
 
             res.status(200).json({data: findOneSlideData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public createSlide = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const slideData: CreateSlideDto = req.body;
+            const createSlideData: Slide = await this.slidesService.createSlide(slideData);
+
+            res.status(201).json({data: createSlideData, message: 'created'});
         } catch (error) {
             next(error);
         }

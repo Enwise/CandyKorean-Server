@@ -1,10 +1,11 @@
 import {Slide} from "../interfaces/slides.interface";
 import {AppDataSource} from "../config/data-source";
 import {SlidesEntity} from "../entities/slides.entity";
-import {Class} from "../interfaces/classes.interface";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
-import {ClassesEntity} from "../entities/classes.entity";
+import {CreateSlideDto} from "../dtos/slides.dto";
+import {Content} from "../interfaces/contents.interface";
+import {ContentsEntity} from "../entities/contents.entity";
 
 class SlidesService {
     public async findAllSlides(): Promise<Slide[]> {
@@ -20,6 +21,18 @@ class SlidesService {
 
         return findSlide;
     }
+
+    public async createSlide(slideData: CreateSlideDto): Promise<Slide> {
+        if (isEmpty(slideData)) throw new HttpException(400, "SlideData is empty");
+
+        const findContent: Content = await ContentsEntity.findOne({where: {content_id: slideData.content_id}});
+        if (!findContent) throw new HttpException(409, "Content doesn't exist");
+
+        const createSlideData: Slide = await SlidesEntity.create({...slideData, content: findContent});
+
+        return createSlideData;
+    }
+
 }
 
 export default SlidesService;
