@@ -6,7 +6,7 @@ import {HttpException} from '../exceptions/HttpException';
 const validationMiddleware = (
     type: any,
     value: string | 'body' | 'query' | 'params' = 'body',
-    skipMissingProperties = false,
+    skipMissingProperties = true,
     whitelist = true,
     forbidNonWhitelisted = true,
 ): RequestHandler => {
