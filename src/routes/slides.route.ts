@@ -17,6 +17,7 @@ class SlidesRoute implements Routes {
         this.router.get(`${this.path}`, this.slidesController.getSlides);
         this.router.get(`${this.path}/:id(\\d+)`, this.slidesController.getSlideById);
         this.router.post(`${this.path}`, validationMiddleware(CreateSlideDto), this.slidesController.createSlide);
+        this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateSlideDto), this.slidesController.updateSlide);
     }
 }
 

@@ -37,6 +37,18 @@ class SlidesController {
             next(error);
         }
     }
+
+    public updateSlide = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const slideId = Number(req.params.id);
+            const slideData: CreateSlideDto = req.body;
+            const updateSlideData: Slide = await this.slidesService.updateSlide(slideId, slideData);
+
+            res.status(200).json({data: updateSlideData, message: 'updated'});
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default SlidesController;

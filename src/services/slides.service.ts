@@ -6,6 +6,9 @@ import {HttpException} from "../exceptions/HttpException";
 import {CreateSlideDto} from "../dtos/slides.dto";
 import {Content} from "../interfaces/contents.interface";
 import {ContentsEntity} from "../entities/contents.entity";
+import {CreateClassesDto} from "../dtos/classes.dto";
+import {Class} from "../interfaces/classes.interface";
+import {ClassesEntity} from "../entities/classes.entity";
 
 class SlidesService {
     public async findAllSlides(): Promise<Slide[]> {
@@ -31,6 +34,19 @@ class SlidesService {
         const createSlideData: Slide = await SlidesEntity.create({...slideData, content: findContent});
 
         return createSlideData;
+    }
+
+    public async updateSlide(slideId: number, slideData: CreateSlideDto): Promise<Slide> {
+        if (isEmpty(slideId)) throw new HttpException(400, "SlideId is empty");
+
+        const findSlide: Slide = await SlidesEntity.findOne({where: {slide_id: slideId}});
+        if (!findSlide) throw new HttpException(409, "Slide doesn't exist");
+
+        await SlidesEntity.update(slideId, {...slideData});
+
+        const updateSlide: Slide = await SlidesEntity.findOne({where: {slide_id: slideId}});
+
+        return updateSlide;
     }
 
 }
