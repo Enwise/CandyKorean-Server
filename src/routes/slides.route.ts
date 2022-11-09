@@ -13,6 +13,7 @@ class SlidesRoute implements Routes {
 
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.slidesController.getSlides);
+        this.router.get(`${this.path}/:id(\\d+)`, this.slidesController.getSlideById);
     }
 }
 

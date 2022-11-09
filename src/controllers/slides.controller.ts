@@ -14,6 +14,17 @@ class SlidesController {
             next(error);
         }
     }
+
+    public getSlideById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const slideId = Number(req.params.id);
+            const findOneSlideData: Slide = await this.slidesService.findSlideById(slideId);
+
+            res.status(200).json({data: findOneSlideData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default SlidesController;
