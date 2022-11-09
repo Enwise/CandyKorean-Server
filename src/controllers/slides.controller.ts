@@ -49,6 +49,17 @@ class SlidesController {
             next(error)
         }
     }
+
+    public deleteSlide = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const slideId = Number(req.params.id);
+            const deleteSlideData: Slide = await this.slidesService.deleteSlide(slideId);
+
+            res.status(200).json({data: deleteSlideData, message: 'deleted'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default SlidesController;
