@@ -9,7 +9,7 @@ import {CreateContentDto} from "../dtos/contents.dto";
 
 class ContentsService {
     public async findAllContents(): Promise<Content[]> {
-        const contents: Content[] = await AppDataSource.getRepository(ContentsEntity).find({});
+        const contents: Content[] = await AppDataSource.getRepository(ContentsEntity).find({relations: {class_entity: true}});
         return contents;
     }
 
@@ -41,6 +41,9 @@ class ContentsService {
 
         const findContent: Content = await ContentsEntity.findOne({where: {content_id: contentId}});
         if (!findContent) throw new HttpException(409, "Content doesn't exist");
+
+        const findClass: Class = await ClassesEntity.findOne({where: {class_id: contentData.class_id}});
+        if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
         await ContentsEntity.update(contentId, {...contentData});
 

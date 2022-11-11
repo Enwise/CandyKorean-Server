@@ -4,7 +4,7 @@ export class CreateCourseDto {
     @IsString()
     public name: string
 
-    @IsNumber()
+    @IsString()
     public price: number
 
     @IsString()
@@ -13,7 +13,7 @@ export class CreateCourseDto {
     @IsString()
     public category: string
 
-    @IsNumber()
+    @IsString()
     public view_count: number
 
     @IsString()
