@@ -9,7 +9,7 @@ import {LevelEntity} from "../entities/levels.entity";
 
 class CoursesService {
     public async findAllCourses(): Promise<Course[]> {
-        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({});
+        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({relations: {level: true}});
         return courses;
     }
 
@@ -26,7 +26,7 @@ class CoursesService {
         if (isEmpty(courseData)) throw new HttpException(400, "CourseData is empty");
 
         const findCourse: Course = await CourseEntity.findOne({where: {name: courseData.name}});
-        if (!findCourse) throw new HttpException(409, `this course name ${courseData.name} already exists`);
+        if (findCourse) throw new HttpException(409, `this course name ${courseData.name} already exists`);
 
         const findLevel: Level = await LevelEntity.findOne({where: {level_id: Number(courseData.level_id)}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
@@ -42,7 +42,17 @@ class CoursesService {
         const findCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
         if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        await CourseEntity.update(courseId, {...courseData});
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: Number(courseData.level_id)}});
+        if (!findLevel) throw new HttpException(409, "Level doesn't exist");
+
+        await CourseEntity.update(courseId, {
+            name: courseData.name,
+            info: courseData.info,
+            price: courseData.price,
+            category: courseData.category,
+            view_count: courseData.view_count,
+            level: findLevel
+        });
 
         const updateCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
 
