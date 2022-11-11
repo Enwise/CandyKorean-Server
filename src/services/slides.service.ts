@@ -9,14 +9,14 @@ import {ContentsEntity} from "../entities/contents.entity";
 
 class SlidesService {
     public async findAllSlides(): Promise<Slide[]> {
-        const slides: Slide[] = await AppDataSource.getRepository(SlidesEntity).find({});
+        const slides: Slide[] = await AppDataSource.getRepository(SlidesEntity).find({relations: {content: true}});
         return slides;
     }
 
     public async findSlideById(slideId: number): Promise<Slide> {
         if (isEmpty(slideId)) throw new HttpException(400, "slideId is empty");
 
-        const findSlide: Slide = await SlidesEntity.findOne({where: {slide_id: slideId}})
+        const findSlide: Slide = await SlidesEntity.findOne({where: {slide_id: slideId,}, relations: {content: true}})
         if (!findSlide) throw new HttpException(409, "Slide doesn't exist");
 
         return findSlide;
@@ -52,7 +52,7 @@ class SlidesService {
         const findSlide: Slide = await SlidesEntity.findOne({where: {slide_id: slideId}});
         if (!findSlide) throw new HttpException(409, "Slide doesn't exist");
 
-        await SlidesEntity.update(slideId,{enabled: false});
+        await SlidesEntity.update(slideId, {enabled: false});
 
         return findSlide;
     }
