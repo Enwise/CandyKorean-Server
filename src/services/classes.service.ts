@@ -9,14 +9,14 @@ import {CourseEntity} from "../entities/courses.entity";
 
 class ClassesService {
     public async findAllClasses(): Promise<Class[]> {
-        const classes: Class[] = await AppDataSource.getRepository(ClassesEntity).find({});
+        const classes: Class[] = await AppDataSource.getRepository(ClassesEntity).find({relations: {course: true}});
         return classes;
     }
 
     public async findClassesById(classId: number): Promise<Class> {
         if (isEmpty(classId)) throw new HttpException(400, "classId is empty");
 
-        const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}})
+        const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}, relations: {course: true}})
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
         return findClass;
@@ -31,20 +31,23 @@ class ClassesService {
         const findCourse: Course = await CourseEntity.findOne({where: {course_id: classData.course_id}});
         if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        const createClassesData: Class = await ClassesEntity.create({...classData, course:findCourse});
+        const createClassesData: Class = await ClassesEntity.create({...classData, course: findCourse});
 
-        return  createClassesData;
+        return createClassesData;
     }
 
     public async updateClass(classId: number, classData: CreateClassesDto): Promise<Class> {
         if (isEmpty(classId)) throw new HttpException(400, "Class is empty");
 
-        const findClass: Class = await ClassesEntity.findOne({where:{class_id:classId}});
+        const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}});
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
-        await ClassesEntity.update(classId, {...classData});
+        const findCourse: Course = await CourseEntity.findOne({where: {course_id: classData.course_id}});
+        if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        const updateClass: Class = await ClassesEntity.findOne({where:{class_id:classId}});
+        await ClassesEntity.update(classId, {name:classData.name, course: findClass});
+
+        const updateClass: Class = await ClassesEntity.findOne({where: {class_id: classId}});
 
         return updateClass;
     }

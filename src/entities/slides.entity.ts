@@ -2,7 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -33,6 +33,7 @@ export class SlidesEntity extends BaseEntity implements Slide{
     @UpdateDateColumn()
     date_updated: Date;
 
+    @JoinColumn({name:"content_id"})
     @ManyToOne(()=>ContentsEntity, (content)=>content.slides)
     content: ContentsEntity;
 }

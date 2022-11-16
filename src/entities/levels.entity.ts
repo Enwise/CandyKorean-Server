@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Level} from "../interfaces/levels.interfaces";
 import {TutorEntity} from "./tutors.entity";
 import {CourseEntity} from "./courses.entity";
@@ -17,6 +17,7 @@ export class LevelEntity extends BaseEntity implements Level {
     @Column()
     info: string
 
+    @JoinColumn({name:"tutor_id"})
     @ManyToOne(() => TutorEntity, (tutor) => tutor.levels)
     tutor: TutorEntity
 

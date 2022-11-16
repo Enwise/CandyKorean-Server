@@ -44,7 +44,10 @@ class TutorsService {
         const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
-        await TutorEntity.update(tutorId, {...tutorData})
+        const findUser: User = await UserEntity.findOne({where: {user_id: Number(tutorData.user_id)}});
+        if (!findUser) throw new HttpException(409, "User doesn't exist");
+
+        await TutorEntity.update(tutorId, {name:tutorData.name, user:findUser})
 
         const updateTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: tutorId}});
         return updateTutor;

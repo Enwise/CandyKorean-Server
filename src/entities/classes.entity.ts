@@ -2,7 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, JoinColumn,
     ManyToOne, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -25,6 +25,7 @@ export class ClassesEntity extends BaseEntity implements Class {
     @UpdateDateColumn()
     date_updated: Date
 
+    @JoinColumn({name:"course_id"})
     @ManyToOne(()=>CourseEntity, (course)=>course.classes)
     course: CourseEntity;
 
