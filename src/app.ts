@@ -3,6 +3,7 @@ import cors from 'cors';
 import {Routes} from './interfaces/router.interfaces';
 import {AppDataSource} from "./config/data-source";
 import {NODE_ENV, PORT, ORIGIN, CREDENTIALS} from './config/index';
+import myMorgan from "./middlewares/multer.middleware";
 
 class App {
     public app: express.Application;
@@ -44,6 +45,7 @@ class App {
     }
 
     private initializeMiddlewares() {
+        this.app.use(myMorgan);
         this.app.use(cors({origin: ORIGIN, credentials: CREDENTIALS}));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}));
