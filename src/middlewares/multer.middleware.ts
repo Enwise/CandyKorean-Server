@@ -1,4 +1,5 @@
-import morgan, {StreamOptions} from "morgan"
+import {Request, Response} from "express";
+import morgan, { StreamOptions } from "morgan"
 import logger from "../modules/winston.module";
 
 morgan.token("status", function (req, res) {
@@ -13,7 +14,7 @@ morgan.token("status", function (req, res) {
     return color + res.statusCode + "\x1B[0m";
 });
 
-morgan.token("request", (req, res) => {
+morgan.token("request", (req:Request, res:Response) => {
     return "body" + JSON.stringify(req.body);
 });
 
