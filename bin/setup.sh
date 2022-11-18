@@ -11,3 +11,4 @@ sudo apt-get install -y nodejs
 node -v
 npm -v
 sudo npm install pm2 -g
+sudo npm install typescript @types/node -g
