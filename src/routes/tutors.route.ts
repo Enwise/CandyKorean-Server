@@ -1,6 +1,6 @@
 import {Routes} from "../interfaces/router.interfaces";
 import {Router} from "express";
-import TutorsController from "../controllers/tutors.controllers";
+import TutorsController from "../controllers/tutors.controller";
 import validationMiddleware from "../middlewares/validation.middleware";
 import {CreateTutorDto} from "../dtos/tutors.dto";
 
