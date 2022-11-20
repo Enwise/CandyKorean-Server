@@ -21,7 +21,7 @@ jobs:
             pm2 kill
 
       - name: Clone git repo
-        uses: appleboy//ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           key: ${{secrets.SSH_KEY}}
           host: ${{secrets.HOST}}
@@ -30,7 +30,7 @@ jobs:
             cd CandyKorean-Server
             git reset --hard
             git fetch
-            git checkout -b develop
+            git checkout develop
             git pull origin develop
 
       - name: Build TypeScript to JavaScript

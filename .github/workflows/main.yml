@@ -1,4 +1,4 @@
-name: SERVER_DEV
+name: SERVER_MAIN
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
             pm2 kill
 
       - name: Clone git repo
-        uses: appleboy//ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           key: ${{secrets.SSH_KEY}}
           host: ${{secrets.HOST}}
@@ -30,7 +30,7 @@ jobs:
             cd CandyKorean-Server
             git reset --hard
             git fetch
-            git checkout -b main
+            git checkout main
             git pull origin main
 
       - name: Build TypeScript to JavaScript
