@@ -3,7 +3,6 @@ name: SERVER_DEV
 on:
   push:
     branches:
-      - develop
       - feature/ci
 
 jobs:
@@ -31,7 +30,7 @@ jobs:
             cd CandyKorean-Server
             git reset --hard
             git fetch
-            git pull
+            git pull origin feature/ci
 
       - name: Build TypeScript to JavaScript
         uses: appleboy/ssh-action@master
