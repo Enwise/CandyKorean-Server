@@ -13,6 +13,7 @@ class QuizsRoute implements Routes {
 
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.quizsController.getQuizs);
+        this.router.get(`${this.path}/:id(\\d+)`, this.quizsController.getQuizById);
     }
 }
 
