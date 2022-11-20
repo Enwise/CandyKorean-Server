@@ -10,6 +10,7 @@ import {
 import {Content} from "../interfaces/contents.interface";
 import {ClassesEntity} from "./classes.entity";
 import {SlidesEntity} from "./slides.entity";
+import {QuizsEntity} from "./quizs.entity";
 
 @Entity('content')
 export class ContentsEntity extends BaseEntity implements Content{
@@ -46,4 +47,7 @@ export class ContentsEntity extends BaseEntity implements Content{
 
     @OneToMany(()=>SlidesEntity,(slide)=>slide.content)
     slides: SlidesEntity[]
+
+    @OneToMany(()=>QuizsEntity, (quiz)=>quiz.content)
+    quizs: QuizsEntity[]
 }
