@@ -1,8 +1,6 @@
 import QuizsService from "../services/quizs.service";
 import {NextFunction, Request, Response} from "express";
 import {Quiz} from "../interfaces/quizs.interface";
-import {CreateContentDto} from "../dtos/contents.dto";
-import {Content} from "../interfaces/contents.interface";
 import {CreateQuizDto} from "../dtos/quizs.dto";
 
 class QuizsController {
@@ -37,6 +35,18 @@ class QuizsController {
             res.status(201).json({data: createQuizData, message: 'created'});
         } catch (error) {
             next(error);
+        }
+    }
+
+    public updateQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const quizId = Number(req.params.id);
+            const quizData: CreateQuizDto = req.body;
+            const updateQuizData: Quiz = await this.quizsService.updateQuiz(quizId, quizData);
+
+            res.status(200).json({data: updateQuizData, message: 'updated'});
+        } catch (error) {
+            next(error)
         }
     }
 }

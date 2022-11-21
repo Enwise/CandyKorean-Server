@@ -32,6 +32,22 @@ class QuizsService {
 
         return createQuizData;
     }
+
+    public async updateQuiz(quizId: number, quizData: CreateQuizDto): Promise<Quiz> {
+        if (isEmpty(quizId)) throw new HttpException(400, "quizId is empty");
+
+        const findQuiz: Quiz = await QuizsEntity.findOne({where: {quiz_id: quizId}});
+        if (!findQuiz) throw new HttpException(409, "Quiz doesn't exist");
+
+        const findContent: Content = await ContentsEntity.findOne({where: {content_id: quizData.content_id}});
+        if (!findContent) throw new HttpException(409, "Content doesn't exist");
+
+        await QuizsEntity.update(quizId, {...quizData, content: findContent});
+
+        const updateQuiz: Quiz = await QuizsEntity.findOne({where: {quiz_id: quizId}});
+
+        return updateQuiz;
+    }
 }
 
 export default QuizsService;
