@@ -1,6 +1,9 @@
 import QuizsService from "../services/quizs.service";
 import {NextFunction, Request, Response} from "express";
 import {Quiz} from "../interfaces/quizs.interface";
+import {CreateContentDto} from "../dtos/contents.dto";
+import {Content} from "../interfaces/contents.interface";
+import {CreateQuizDto} from "../dtos/quizs.dto";
 
 class QuizsController {
     public quizsService = new QuizsService();
@@ -21,6 +24,17 @@ class QuizsController {
             const findOneQuizData: Quiz = await this.quizsService.findQuizById(quizId);
 
             res.status(200).json({data: findOneQuizData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public createQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const quizData: CreateQuizDto = req.body;
+            const createQuizData: Quiz = await this.quizsService.createQuiz(quizData);
+
+            res.status(201).json({data: createQuizData, message: 'created'});
         } catch (error) {
             next(error);
         }
