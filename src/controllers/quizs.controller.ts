@@ -49,6 +49,17 @@ class QuizsController {
             next(error)
         }
     }
+
+    public deleteQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const quizId = Number(req.params.id);
+            const deleteQuizData: Quiz = await this.quizsService.deleteQuiz(quizId);
+
+            res.status(200).json({data: deleteQuizData, message: 'deleted'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default QuizsController;

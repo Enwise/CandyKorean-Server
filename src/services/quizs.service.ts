@@ -48,6 +48,17 @@ class QuizsService {
 
         return updateQuiz;
     }
+
+    public async deleteQuiz(quizId: number): Promise<Quiz> {
+        if (isEmpty(quizId)) throw new HttpException(400, "QuizId is empty");
+
+        const findQuiz: Quiz = await QuizsEntity.findOne({where: {quiz_id: quizId}});
+        if (!findQuiz) throw new HttpException(409, "Quiz doesn't exist");
+
+        await ContentsEntity.delete(quizId);
+
+        return findQuiz;
+    }
 }
 
 export default QuizsService;

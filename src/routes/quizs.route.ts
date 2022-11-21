@@ -18,6 +18,7 @@ class QuizsRoute implements Routes {
         this.router.get(`${this.path}/:id(\\d+)`, this.quizsController.getQuizById);
         this.router.post(`${this.path}`, validationMiddleware(CreateQuizDto), this.quizsController.createQuiz);
         this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateQuizDto), this.quizsController.updateQuiz);
+        this.router.delete(`${this.path}/:id(\\d+)`, this.quizsController.deleteQuiz);
     }
 }
 
