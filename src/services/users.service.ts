@@ -27,7 +27,7 @@ class UsersService {
         if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
         const findUser: User = await UserEntity.findOne({where: {login_id: userData.login_id}});
-        if (!findUser) throw new HttpException(409, `This email ${userData.login_id} already exists`);
+        if (findUser) throw new HttpException(409, `This email ${userData.login_id} already exists`);
 
         const hashedPassword = await hash(userData.password, saltRound);
         const createUserData: User = await UserEntity.create({...userData, password: hashedPassword}).save();
