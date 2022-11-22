@@ -6,4 +6,10 @@ export class CreateTutorDto {
 
     @IsString()
     public name: string;
+
+    @IsString()
+    public img_url: string;
+
+    @IsString()
+    public profile_url: string;
 }
