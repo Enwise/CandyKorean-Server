@@ -8,6 +8,7 @@ import ContentsRoute from "./routes/contents.route";
 import AuthRoute from "./routes/auth.route";
 import SlidesRoute from "./routes/slides.route";
 import QuizsRoute from "./routes/quizs.route";
+import PurchasedCoursesRoute from "./routes/purchasedCourses.route";
 
 const app = new App([
     new UsersRoute(),
@@ -18,7 +19,8 @@ const app = new App([
     new ContentsRoute(),
     new AuthRoute(),
     new SlidesRoute(),
-    new QuizsRoute()
+    new QuizsRoute(),
+    new PurchasedCoursesRoute()
 ]);
 
 app.listen()

@@ -9,12 +9,8 @@ import {
     OneToMany
 } from "typeorm"
 import {User} from "../interfaces/users.interface";
-import {hashSync, compareSync} from "bcrypt"
 import {TutorEntity} from "./tutors.entity";
-import {PurchasedCourse} from "../interfaces/purchased_courses.interface";
-import {PurchasedCoursesEntity} from "./purchased_courses.entity";
-
-const saltRound = 10
+import {PurchasedCoursesEntity} from "./purchasedCourses.entity";
 
 @Entity('user')
 export class UserEntity extends BaseEntity implements User {

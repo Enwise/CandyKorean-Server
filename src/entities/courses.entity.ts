@@ -10,7 +10,7 @@ import {
 import {Course} from "../interfaces/courses.interface";
 import {LevelEntity} from "./levels.entity";
 import {ClassesEntity} from "./classes.entity";
-import {PurchasedCoursesEntity} from "./purchased_courses.entity";
+import {PurchasedCoursesEntity} from "./purchasedCourses.entity";
 
 @Entity('course')
 export class CourseEntity extends BaseEntity implements Course {
