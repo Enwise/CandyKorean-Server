@@ -34,11 +34,30 @@ class PurchasedCoursesService {
                 course_id: purchasedCourseData.course_id
             }
         });
-        if (findPurchasedCourse) throw new HttpException(409,"This purchasedCourse is already exists");
+        if (findPurchasedCourse) throw new HttpException(409, "This purchasedCourse is already exists");
 
         const createPurchasedCourseData: PurchasedCourse = await PurchasedCoursesEntity.create({...purchasedCourseData});
 
         return createPurchasedCourseData;
+    }
+
+    public async deletePurchasedCourse(purchasedCourseData: CreatePurchasedCourseDto): Promise<PurchasedCourse> {
+        if (isEmpty(purchasedCourseData)) throw new HttpException(400, "PurchasedCourseData is empty");
+
+        const findPurchasedCourse: PurchasedCourse = await PurchasedCoursesEntity.findOne({
+            where: {
+                user_id: purchasedCourseData.user_id,
+                course_id: purchasedCourseData.course_id
+            }
+        });
+        if (!findPurchasedCourse) throw new HttpException(409, "This purchasedCourse doesn't exist");
+
+        await PurchasedCoursesEntity.update({
+            user_id: purchasedCourseData.user_id,
+            course_id: purchasedCourseData.course_id
+        }, {enabled: false})
+
+        return findPurchasedCourse;
     }
 }
 

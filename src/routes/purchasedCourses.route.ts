@@ -17,6 +17,7 @@ class PurchasedCoursesRoute implements Routes {
         this.router.get(`${this.path}`, this.purchasedCoursesController.getPurchasedCourses);
         this.router.get(`${this.path}/:id(\\d+)`, this.purchasedCoursesController.getPurchasedCourseByUserId);
         this.router.post(`${this.path}`, validationMiddleware(CreatePurchasedCourseDto), this.purchasedCoursesController.createPurchasedCourse);
+        this.router.delete(`${this.path}`, validationMiddleware(CreatePurchasedCourseDto), this.purchasedCoursesController.deletePurchasedCourse);
     }
 }
 
