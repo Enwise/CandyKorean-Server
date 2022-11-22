@@ -14,6 +14,16 @@ class PurchasedCoursesController {
             next(error);
         }
     }
+
+    public getPurchasedCourseByUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userId = Number(req.params.id);
+            const findPurchasedCoursesData: PurchasedCourse[] = await this.purchasedCoursesService.findPurchasedCourseByUserId(userId);
+            res.status(200).json({data: findPurchasedCoursesData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default PurchasedCoursesController;

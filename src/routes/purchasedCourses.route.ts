@@ -13,6 +13,7 @@ class PurchasedCoursesRoute implements Routes {
 
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.purchasedCoursesController.getPurchasedCourses);
+        this.router.get(`${this.path}/:id(\\d+)`, this.purchasedCoursesController.getPurchasedCourseByUserId);
     }
 }
 
