@@ -1,7 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, OneToOne} from "typeorm"
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    BaseEntity,
+    CreateDateColumn,
+    UpdateDateColumn,
+    OneToOne,
+    OneToMany
+} from "typeorm"
 import {User} from "../interfaces/users.interface";
 import {hashSync, compareSync} from "bcrypt"
 import {TutorEntity} from "./tutors.entity";
+import {PurchasedCourse} from "../interfaces/purchased_courses.interface";
+import {PurchasedCoursesEntity} from "./purchased_courses.entity";
 
 const saltRound = 10
 
@@ -35,4 +46,7 @@ export class UserEntity extends BaseEntity implements User {
 
     @OneToOne(() => TutorEntity)
     tutors: TutorEntity[]
+
+    @OneToMany(() => PurchasedCoursesEntity, (purchasedCourse) => purchasedCourse.user)
+    purchasedCourses: PurchasedCoursesEntity[]
 }
