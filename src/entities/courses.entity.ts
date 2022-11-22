@@ -10,6 +10,7 @@ import {
 import {Course} from "../interfaces/courses.interface";
 import {LevelEntity} from "./levels.entity";
 import {ClassesEntity} from "./classes.entity";
+import {PurchasedCoursesEntity} from "./purchasedCourses.entity";
 
 @Entity('course')
 export class CourseEntity extends BaseEntity implements Course {
@@ -37,10 +38,13 @@ export class CourseEntity extends BaseEntity implements Course {
     @UpdateDateColumn()
     date_updated: Date
 
-    @JoinColumn({name:"level_id"})
+    @JoinColumn({name: "level_id"})
     @ManyToOne(() => LevelEntity, (level) => level.courses)
     level: LevelEntity
 
-    @OneToMany(()=>ClassesEntity,(classes)=>classes.course)
+    @OneToMany(() => ClassesEntity, (classes) => classes.course)
     classes: ClassesEntity[]
+
+    @OneToMany(() => PurchasedCoursesEntity, (purchasedCourse) => purchasedCourse.course)
+    purchasedCourses: PurchasedCoursesEntity[]
 }
