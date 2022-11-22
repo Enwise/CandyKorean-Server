@@ -13,7 +13,7 @@ export class UserEntity extends BaseEntity implements User {
     @Column()
     name: string
 
-    @Column()
+    @Column({unique: true})
     login_id: string
 
     @Column()
@@ -33,6 +33,6 @@ export class UserEntity extends BaseEntity implements User {
     @UpdateDateColumn()
     date_updated: Date
 
-    @OneToOne(()=>TutorEntity)
+    @OneToOne(() => TutorEntity)
     tutors: TutorEntity[]
 }
