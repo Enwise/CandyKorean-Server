@@ -8,7 +8,7 @@ export class TutorEntity extends BaseEntity implements Tutor {
     @PrimaryGeneratedColumn()
     tutor_id: number
 
-    @Column()
+    @Column({default: true})
     enabled: boolean
 
     @Column()

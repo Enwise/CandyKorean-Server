@@ -29,7 +29,7 @@ export class ContentsEntity extends BaseEntity implements Content{
     @Column()
     view_count: number
 
-    @Column()
+    @Column({default: true})
     enabled: boolean
 
     @Column()

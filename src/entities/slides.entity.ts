@@ -18,7 +18,7 @@ export class SlidesEntity extends BaseEntity implements Slide{
     @Column()
     display_time: number;
 
-    @Column()
+    @Column({default: true})
     enabled: boolean;
 
     @Column()

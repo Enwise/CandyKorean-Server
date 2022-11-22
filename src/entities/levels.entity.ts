@@ -11,7 +11,7 @@ export class LevelEntity extends BaseEntity implements Level {
     @Column()
     name: string
 
-    @Column()
+    @Column({default: true})
     enabled: boolean
 
     @Column()

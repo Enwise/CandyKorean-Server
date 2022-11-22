@@ -6,5 +6,6 @@ export interface PurchasedCourse {
     course: Course,
     is_started: boolean,
     date_created: Date,
-    is_completed: boolean
+    is_completed: boolean,
+    enabled: boolean
 }

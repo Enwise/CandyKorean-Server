@@ -11,14 +11,17 @@ export class PurchasedCoursesEntity extends BaseEntity implements PurchasedCours
     @Column()
     is_started: boolean
 
+    @Column({default: true})
+    enabled: boolean
+
     @CreateDateColumn()
     date_created: Date
 
     @PrimaryColumn()
-    user_id:number
+    user_id: number
 
     @PrimaryColumn()
-    course_id:number
+    course_id: number
 
     @JoinColumn({name: "user_id"})
     @ManyToOne(() => UserEntity, (user) => user.purchasedCourses)
