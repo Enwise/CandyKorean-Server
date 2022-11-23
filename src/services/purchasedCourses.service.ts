@@ -1,4 +1,4 @@
-import {PurchasedCourse} from "../interfaces/purchased_courses.interface";
+import {PurchasedCourse} from "../interfaces/purchasedCourses.interface";
 import {AppDataSource} from "../config/data-source";
 import {PurchasedCoursesEntity} from "../entities/purchasedCourses.entity";
 import {isEmpty} from "../utils/util";

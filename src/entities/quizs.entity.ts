@@ -8,10 +8,10 @@ export class QuizsEntity extends BaseEntity implements Quiz {
     quiz_id: number;
 
     @Column()
-    question: string;
+    style: string;
 
-    @Column()
-    answer: string;
+    @Column({length: 511})
+    json: string;
 
     @JoinColumn({name:"content_id"})
     @ManyToOne(()=>ContentsEntity, (content) => content.quizs)
