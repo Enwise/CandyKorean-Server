@@ -1,5 +1,5 @@
 import {BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
-import {PurchasedCourse} from "../interfaces/purchased_courses.interface";
+import {PurchasedCourse} from "../interfaces/purchasedCourses.interface";
 import {UserEntity} from "./users.entity";
 import {CourseEntity} from "./courses.entity";
 

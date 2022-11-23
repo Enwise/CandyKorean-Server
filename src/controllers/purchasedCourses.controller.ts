@@ -1,6 +1,6 @@
 import PurchasedCoursesService from "../services/purchasedCourses.service";
 import {NextFunction, Request, Response} from "express";
-import {PurchasedCourse} from "../interfaces/purchased_courses.interface";
+import {PurchasedCourse} from "../interfaces/purchasedCourses.interface";
 import {CreatePurchasedCourseDto} from "../dtos/purchasedCourses.dto";
 
 class PurchasedCoursesController {
