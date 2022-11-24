@@ -1,7 +1,7 @@
 import {Class} from "./classes.interface";
 import {User} from "./users.interface";
 
-export interface LearendClasses {
+export interface LearnedClasses {
     user: User,
     class: Class,
     learn_time: number,

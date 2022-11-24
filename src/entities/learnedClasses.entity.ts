@@ -8,12 +8,12 @@ import {
     PrimaryColumn,
     UpdateDateColumn
 } from "typeorm";
-import {LearendClasses} from "../interfaces/learendClasses.interface";
+import {LearnedClasses} from "../interfaces/learnedClasses.interface";
 import {UserEntity} from "./users.entity";
 import {ClassesEntity} from "./classes.entity";
 
 @Entity('learned_class')
-export class LearnedClassesEntity extends BaseEntity implements LearendClasses {
+export class LearnedClassesEntity extends BaseEntity implements LearnedClasses {
     @Column()
     is_completed: boolean
 
