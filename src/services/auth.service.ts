@@ -12,8 +12,8 @@ class AuthService {
     public async signup(userData: CreateUserDto): Promise<User> {
         if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
-        const findUser: User = await UserEntity.findOne({where: {name: userData.name}});
-        if (findUser) throw new HttpException(409, `This email ${userData.name} already exist`);
+        const findUser: User = await UserEntity.findOne({where: {login_id: userData.login_id}});
+        if (findUser) throw new HttpException(409, `This email ${userData.login_id} already exist`);
 
         const hashedPassword = await hash(userData.password, 10);
         const createUserData: User = await UserEntity.create({...userData, password: hashedPassword}).save();
@@ -22,9 +22,10 @@ class AuthService {
 
     public async login(userData: CreateUserDto): Promise<{ findUser: User; tokenData: TokenData }> {
         if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+        if (isEmpty(userData.login_id)) throw new HttpException(400, "Login_id is empty");
 
-        const findUser: User = await UserEntity.findOne({where: {name: userData.name}});
-        if (!findUser) throw new HttpException(409, `This name ${userData.name} was not found`);
+        const findUser: User = await UserEntity.findOne({where: {login_id: userData.login_id}});
+        if (!findUser) throw new HttpException(409, `This name ${userData.login_id} was not found`);
 
         const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
         if (!isPasswordMatching) throw new HttpException(409, "Password not matching");
