@@ -25,15 +25,9 @@ export class CreateUserDto {
   @IsString()
   public gender: string;
 
-  @IsDate()
-  public date_of_birth: Date;
+  @IsString()
+  public date_of_birth: string;
 
-  @IsArray()
-  public survey1_answer: string[];
-
-  @IsArray()
-  public survey2_answer: string[];
-
-  @IsArray()
-  public survey3_answer: string[];
+  @IsString()
+  public survey_answers: string;
 }

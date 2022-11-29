@@ -45,16 +45,10 @@ export class UserEntity extends BaseEntity implements User {
   gender: string;
 
   @Column()
-  date_of_birth: Date;
+  date_of_birth: string;
 
   @Column()
-  survey1_answer: string[];
-
-  @Column()
-  survey2_answer: string[];
-
-  @Column()
-  survey3_answer: string[];
+  survey_answers: string;
 
   @Column()
   @CreateDateColumn()
