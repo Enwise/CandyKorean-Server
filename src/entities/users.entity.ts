@@ -1,48 +1,75 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    BaseEntity,
-    CreateDateColumn,
-    UpdateDateColumn,
-    OneToOne,
-    OneToMany
-} from "typeorm"
-import {User} from "../interfaces/users.interface";
-import {TutorEntity} from "./tutors.entity";
-import {PurchasedCoursesEntity} from "./purchasedCourses.entity";
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  OneToMany,
+} from "typeorm";
+import { User } from "../interfaces/users.interface";
+import { TutorEntity } from "./tutors.entity";
+import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
 
-@Entity('user')
+@Entity("user")
 export class UserEntity extends BaseEntity implements User {
-    @PrimaryGeneratedColumn()
-    user_id: number
+  @PrimaryGeneratedColumn()
+  user_id: number;
 
-    @Column()
-    name: string
+  @Column()
+  name: string;
 
-    @Column({unique: true})
-    login_id: string
+  @Column({ unique: true })
+  login_id: string;
 
-    @Column()
-    password: string
+  @Column()
+  password: string;
 
-    @Column()
-    enabled: boolean
+  @Column()
+  enabled: boolean;
 
-    @Column()
-    nickname: string
+  @Column()
+  nickname: string;
 
-    @Column()
-    @CreateDateColumn()
-    date_created: Date
+  @Column()
+  nationality: string;
 
-    @Column()
-    @UpdateDateColumn()
-    date_updated: Date
+  @Column()
+  korean_level: string;
 
-    @OneToOne(() => TutorEntity)
-    tutors: TutorEntity[]
+  @Column()
+  job: string;
 
-    @OneToMany(() => PurchasedCoursesEntity, (purchasedCourse) => purchasedCourse.user)
-    purchasedCourses: PurchasedCoursesEntity[]
+  @Column()
+  gender: string;
+
+  @Column()
+  date_of_birth: Date;
+
+  @Column()
+  survey1_answer: string[];
+
+  @Column()
+  survey2_answer: string[];
+
+  @Column()
+  survey3_answer: string[];
+
+  @Column()
+  @CreateDateColumn()
+  date_created: Date;
+
+  @Column()
+  @UpdateDateColumn()
+  date_updated: Date;
+
+  @OneToOne(() => TutorEntity)
+  tutors: TutorEntity[];
+
+  @OneToMany(
+    () => PurchasedCoursesEntity,
+    (purchasedCourse) => purchasedCourse.user
+  )
+  purchasedCourses: PurchasedCoursesEntity[];
 }
