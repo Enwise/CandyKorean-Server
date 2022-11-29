@@ -4,6 +4,7 @@ import {Routes} from './interfaces/router.interfaces';
 import {AppDataSource} from "./config/data-source";
 import {NODE_ENV, PORT, ORIGIN, CREDENTIALS} from './config/index';
 import myMorgan from "./middlewares/multer.middleware";
+import errorMiddleware from "./middlewares/error.middleware";
 
 class App {
     public app: express.Application;
@@ -18,6 +19,7 @@ class App {
         this.env !== 'test' && this.connectToDatabase();
         this.initializeMiddlewares();
         this.initializeRoutes(routes);
+        this.initializeErrorHandling()
     }
 
     public listen() {
@@ -58,6 +60,10 @@ class App {
         this.app.use('/', ((req, res, next) => {
             res.send("Hello World!");
         }))
+    }
+
+    private initializeErrorHandling() {
+        this.app.use(errorMiddleware);
     }
 }
 
