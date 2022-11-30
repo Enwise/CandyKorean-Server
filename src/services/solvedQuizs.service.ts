@@ -39,6 +39,31 @@ class SolvedQuizsService {
 
         return createSolvedQuizData;
     }
+
+    public async updateSolvedQuiz(solvedQuizData: CreateSolvedQuizDto): Promise<SolvedQuiz> {
+        if (isEmpty(solvedQuizData)) throw new HttpException(400, "solvedQuizData is empty");
+
+        const findSolvedQuiz: SolvedQuiz = await SolvedQuizsEntity.findOne({
+            where: {
+                user_id: solvedQuizData.user_id,
+                quiz_id: solvedQuizData.quiz_id
+            }
+        });
+        if (!findSolvedQuiz) throw new HttpException(409, "SolvedQuiz doesn't exist");
+
+        await SolvedQuizsEntity.update({
+            user_id: solvedQuizData.user_id,
+            quiz_id: solvedQuizData.quiz_id
+        }, solvedQuizData);
+
+        const updateSolvedQuiz: SolvedQuiz = await SolvedQuizsEntity.findOne({
+            where: {
+                user_id: solvedQuizData.user_id,
+                quiz_id: solvedQuizData.quiz_id
+            }
+        });
+        return updateSolvedQuiz
+    }
 }
 
 export default SolvedQuizsService;

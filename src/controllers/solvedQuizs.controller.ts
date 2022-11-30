@@ -36,6 +36,17 @@ class SolvedQuizsController {
             next(error);
         }
     }
+
+    public updateSolvedQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const solvedQuizData = req.body;
+            const updateSolvedQuizData: SolvedQuiz = await this.solvedQuizService.updateSolvedQuiz(solvedQuizData);
+
+            res.status(200).json({data: updateSolvedQuizData, message: 'updated'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default SolvedQuizsController;

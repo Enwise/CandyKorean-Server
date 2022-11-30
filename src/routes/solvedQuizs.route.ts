@@ -17,6 +17,7 @@ class SolvedQuizsRoute implements Routes {
         this.router.get(`${this.path}`, this.solvedQuizController.getSolvedQuizs);
         this.router.get(`${this.path}/:id(\\d+)`, this.solvedQuizController.getSolvedQuizByUser);
         this.router.post(`${this.path}`, validationMiddleware(CreateSolvedQuizDto, 'body'), this.solvedQuizController.createSolvedQuiz);
+        this.router.put(`${this.path}`, validationMiddleware(CreateSolvedQuizDto, 'body'), this.solvedQuizController.updateSolvedQuiz);
     }
 }
 
