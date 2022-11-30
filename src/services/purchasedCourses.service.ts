@@ -36,7 +36,7 @@ class PurchasedCoursesService {
         });
         if (findPurchasedCourse) throw new HttpException(409, "This purchasedCourse is already exists");
 
-        const createPurchasedCourseData: PurchasedCourse = await PurchasedCoursesEntity.create({...purchasedCourseData});
+        const createPurchasedCourseData: PurchasedCourse = await PurchasedCoursesEntity.create({...purchasedCourseData}).save();
 
         return createPurchasedCourseData;
     }

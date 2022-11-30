@@ -31,7 +31,7 @@ class ContentsService {
         const findClass: Class = await ClassesEntity.findOne({where: {class_id: contentData.class_id}});
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
-        const createContentData: Content = await ContentsEntity.create({...contentData, class_entity: findClass});
+        const createContentData: Content = await ContentsEntity.create({...contentData, class_entity: findClass}).save();
 
         return createContentData;
     }

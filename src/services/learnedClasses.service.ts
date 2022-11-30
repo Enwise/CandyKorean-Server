@@ -27,7 +27,7 @@ class LearnedClassesService{
         });
         if (findLearnedClass) throw new HttpException(409, "This purchasedCourse is already exists");
 
-        const createFindLearnedClassData: LearnedClasses = await LearnedClassesEntity.create({...learnedClassData});
+        const createFindLearnedClassData: LearnedClasses = await LearnedClassesEntity.create({...learnedClassData}).save();
 
         return createFindLearnedClassData;
     }

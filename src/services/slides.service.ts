@@ -28,7 +28,7 @@ class SlidesService {
         const findContent: Content = await ContentsEntity.findOne({where: {content_id: slideData.content_id}});
         if (!findContent) throw new HttpException(409, "Content doesn't exist");
 
-        const createSlideData: Slide = await SlidesEntity.create({...slideData, content: findContent});
+        const createSlideData: Slide = await SlidesEntity.create({...slideData, content: findContent}).save();
 
         return createSlideData;
     }
