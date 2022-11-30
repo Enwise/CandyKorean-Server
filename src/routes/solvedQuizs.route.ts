@@ -13,6 +13,7 @@ class SolvedQuizsRoute implements Routes{
 
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.solvedQuizController.getSolvedQuizs);
+        this.router.get(`${this.path}/:id(\\d+)`, this.solvedQuizController.getSolvedQuizByUser);
     }
 }
 

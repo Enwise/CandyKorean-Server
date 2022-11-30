@@ -14,6 +14,17 @@ class SolvedQuizsController {
             next(error);
         }
     }
+
+    public getSolvedQuizByUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userId = Number(req.params.id);
+            const findSolvedQuizByUser: SolvedQuiz[] = await this.solvedQuizService.findSolvedQuizByUser(userId);
+
+            res.status(200).json({data: findSolvedQuizByUser, message: 'findByUser'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default SolvedQuizsController;
