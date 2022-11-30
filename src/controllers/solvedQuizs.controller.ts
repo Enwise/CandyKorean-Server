@@ -25,6 +25,17 @@ class SolvedQuizsController {
             next(error);
         }
     }
+
+    public createSolvedQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const solvedQuizData = req.body;
+            const createSolvedQuizData: SolvedQuiz = await this.solvedQuizService.createSolvedQuiz(solvedQuizData);
+
+            res.status(201).json({data: createSolvedQuizData, message: 'created'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default SolvedQuizsController;
