@@ -1,10 +1,12 @@
 import {IsNumber, IsString} from "class-validator";
+import {Type} from "class-transformer";
 
 export class CreateCourseDto {
     @IsString()
     public name: string
 
-    @IsString()
+    @Type(()=>Number)
+    @IsNumber()
     public price: number
 
     @IsString()
@@ -13,7 +15,8 @@ export class CreateCourseDto {
     @IsString()
     public category: string
 
-    @IsString()
+    @Type(()=>Number)
+    @IsNumber()
     public view_count: number
 
     @IsString()

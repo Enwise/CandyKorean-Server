@@ -1,8 +1,10 @@
-import {IsString} from "class-validator";
+import {IsNumber, IsString} from "class-validator";
+import {Type} from "class-transformer";
 
 export class CreateTutorDto {
-    @IsString()
-    public user_id: string;
+    @Type(()=>Number)
+    @IsNumber()
+    public user_id: number;
 
     @IsString()
     public name: string;
