@@ -31,7 +31,7 @@ class ClassesService {
         const findCourse: Course = await CourseEntity.findOne({where: {course_id: classData.course_id}});
         if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        const createClassesData: Class = await ClassesEntity.create({...classData, course: findCourse});
+        const createClassesData: Class = await ClassesEntity.create({...classData, course: findCourse}).save();
 
         return createClassesData;
     }

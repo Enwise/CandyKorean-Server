@@ -28,7 +28,7 @@ class QuizsService {
         const findContent: Content = await ContentsEntity.findOne({where: {content_id: quizData.content_id}});
         if (!findContent) throw new HttpException(409, "Content doesn't exist");
 
-        const createQuizData: Quiz = await QuizsEntity.create({...quizData, content: findContent});
+        const createQuizData: Quiz = await QuizsEntity.create({...quizData, content: findContent}).save();
 
         return createQuizData;
     }

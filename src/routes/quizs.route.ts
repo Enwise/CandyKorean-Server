@@ -5,7 +5,7 @@ import validationMiddleware from "../middlewares/validation.middleware";
 import {CreateQuizDto} from "../dtos/quizs.dto";
 
 class QuizsRoute implements Routes {
-    public path = '/content';
+    public path = '/quiz';
     public router = Router();
     public quizsController = new quizsController();
 

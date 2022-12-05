@@ -10,6 +10,7 @@ import SlidesRoute from "./routes/slides.route";
 import QuizsRoute from "./routes/quizs.route";
 import PurchasedCoursesRoute from "./routes/purchasedCourses.route";
 import LearnedClassesRoute from "./routes/learnedClasses.route";
+import SolvedQuizsRoute from "./routes/solvedQuizs.route";
 
 const app = new App([
     new UsersRoute(),
@@ -22,7 +23,8 @@ const app = new App([
     new SlidesRoute(),
     new QuizsRoute(),
     new PurchasedCoursesRoute(),
-    new LearnedClassesRoute()
+    new LearnedClassesRoute(),
+    new SolvedQuizsRoute()
 ]);
 
 app.listen()

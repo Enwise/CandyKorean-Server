@@ -1,4 +1,5 @@
-import {IsString} from "class-validator";
+import {IsNumber, IsString} from "class-validator";
+import {Type} from "class-transformer";
 
 export class CreateLevelDto {
     @IsString()
@@ -7,6 +8,7 @@ export class CreateLevelDto {
     @IsString()
     public info: string;
 
-    @IsString()
-    public tutor_id: string;
+    @Type(()=>Number)
+    @IsNumber()
+    public tutor_id: number;
 }

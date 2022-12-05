@@ -1,18 +1,15 @@
 import {IsBoolean, IsNumber} from "class-validator";
 import {Type} from "class-transformer";
 
-export class CreatePurchasedCourseDto {
+export class CreateSolvedQuizDto{
     @Type(()=>Number)
     @IsNumber()
-    public user_id: number;
+    user_id: number
 
     @Type(()=>Number)
     @IsNumber()
-    public course_id: number;
+    quiz_id: number
 
     @IsBoolean()
-    public is_started: boolean;
-
-    @IsBoolean()
-    public is_completed: boolean;
+    is_correct: boolean
 }
