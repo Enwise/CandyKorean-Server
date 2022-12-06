@@ -47,7 +47,7 @@ class LevelsService {
         const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(levelData.tutor_id)}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
-        await LevelEntity.update(levelId, {name: levelData.name, info: levelData.info, tutor: findTutor});
+        await LevelEntity.update(levelId, {name: levelData.name, info: levelData.info, tutor: findTutor, enabled: levelData.enabled});
 
         const updateLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
 
