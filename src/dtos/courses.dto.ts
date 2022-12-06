@@ -21,4 +21,7 @@ export class CreateCourseDto {
 
     @IsString()
     public level_id: string
+
+    @IsString()
+    public tutor_id: string
 }
