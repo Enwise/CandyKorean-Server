@@ -11,6 +11,7 @@ import QuizsRoute from "./routes/quizs.route";
 import PurchasedCoursesRoute from "./routes/purchasedCourses.route";
 import LearnedClassesRoute from "./routes/learnedClasses.route";
 import SolvedQuizsRoute from "./routes/solvedQuizs.route";
+import FileInfosRoute from "./routes/fileInfos.route";
 
 const app = new App([
     new UsersRoute(),
@@ -24,7 +25,8 @@ const app = new App([
     new QuizsRoute(),
     new PurchasedCoursesRoute(),
     new LearnedClassesRoute(),
-    new SolvedQuizsRoute()
+    new SolvedQuizsRoute(),
+    new FileInfosRoute()
 ]);
 
 app.listen()
