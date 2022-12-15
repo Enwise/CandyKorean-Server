@@ -22,4 +22,8 @@ export class CreateContentDto {
     @Type(()=>Number)
     @IsNumber()
     public class_id: number
+
+    @Type(()=>Boolean)
+    @IsNumber()
+    public is_portrait: boolean
 }

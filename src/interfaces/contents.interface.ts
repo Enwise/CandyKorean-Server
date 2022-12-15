@@ -10,5 +10,6 @@ export interface Content {
     length: number,
     date_created: Date,
     date_updated: Date,
-    class_entity: Class
+    class_entity: Class,
+    is_portrait: boolean,
 }

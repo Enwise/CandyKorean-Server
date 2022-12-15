@@ -32,6 +32,9 @@ export class ContentsEntity extends BaseEntity implements Content{
     @Column({default: true})
     enabled: boolean
 
+    @Column({default: true})
+    is_portrait: boolean
+
     @Column()
     length: number
 
