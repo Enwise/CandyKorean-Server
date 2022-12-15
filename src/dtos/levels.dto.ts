@@ -12,6 +12,7 @@ export class CreateLevelDto {
     @IsNumber()
     public tutor_id: number;
 
+    @Type(()=>Boolean)
     @IsBoolean()
     public enabled: boolean;
 }
