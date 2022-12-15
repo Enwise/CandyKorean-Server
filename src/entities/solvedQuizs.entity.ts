@@ -1,16 +1,17 @@
-import {BaseEntity, Column, CreateDateColumn, JoinColumn, ManyToOne} from "typeorm";
+import {BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
 import {SolvedQuiz} from "../interfaces/solvedQuiz.interface";
 import {QuizsEntity} from "./quizs.entity";
 import {UserEntity} from "./users.entity";
 
+@Entity()
 export class SolvedQuizsEntity extends BaseEntity implements SolvedQuiz {
     @Column()
     is_correct: boolean
 
-    @Column()
+    @PrimaryColumn()
     user_id: number
 
-    @Column()
+    @PrimaryColumn()
     quiz_id: number
 
     @CreateDateColumn()

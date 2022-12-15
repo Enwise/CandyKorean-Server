@@ -41,6 +41,8 @@ jobs:
           username: ${{secrets.USER}}
           script: |
             cd CandyKorean-Server
+            npm install
+            export NODE_OPTIONS="--max-old-space-size=4096"
             npm run tsc
 
       - name: Start the Server

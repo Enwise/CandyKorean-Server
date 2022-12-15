@@ -10,6 +10,7 @@ export class CreateSolvedQuizDto{
     @IsNumber()
     quiz_id: number
 
+    @Type(()=>Boolean)
     @IsBoolean()
     is_correct: boolean
 }

@@ -3,7 +3,7 @@ import cors from "cors";
 import {Routes} from './interfaces/router.interfaces';
 import {AppDataSource} from "./config/data-source";
 import {NODE_ENV, PORT, ORIGIN, CREDENTIALS} from './config/index';
-import myMorgan from "./middlewares/multer.middleware";
+import myMorgan from "./middlewares/morgan.middleware";
 import errorMiddleware from "./middlewares/error.middleware";
 
 class App {
