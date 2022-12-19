@@ -33,6 +33,9 @@ export class CourseEntity extends BaseEntity implements Course {
     @Column()
     view_count: number
 
+    @Column({default: false})
+    is_wishlist: boolean
+
     @CreateDateColumn()
     date_created: Date
 
@@ -52,4 +55,6 @@ export class CourseEntity extends BaseEntity implements Course {
 
     @OneToMany(() => PurchasedCoursesEntity, (purchasedCourse) => purchasedCourse.course)
     purchasedCourses: PurchasedCoursesEntity[]
+
+
 }
