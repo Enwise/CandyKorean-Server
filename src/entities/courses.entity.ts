@@ -3,11 +3,12 @@ import {
     Column,
     CreateDateColumn,
     Entity, JoinColumn,
-    ManyToOne, OneToMany,
+    ManyToOne, OneToMany, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Course} from "../interfaces/courses.interface";
+import { TutorEntity } from './tutors.entity';
 import {LevelEntity} from "./levels.entity";
 import {ClassesEntity} from "./classes.entity";
 import {PurchasedCoursesEntity} from "./purchasedCourses.entity";
@@ -41,9 +42,13 @@ export class CourseEntity extends BaseEntity implements Course {
     @JoinColumn({name: "level_id"})
     @ManyToOne(() => LevelEntity, (level) => level.courses)
     level: LevelEntity
+    
+    @JoinColumn({name:"tutor_id"})
+    @OneToOne(() => TutorEntity)
+    tutor: TutorEntity
 
     @OneToMany(() => ClassesEntity, (classes) => classes.course)
-    classes: ClassesEntity[]
+    classes: ClassesEntity[] 
 
     @OneToMany(() => PurchasedCoursesEntity, (purchasedCourse) => purchasedCourse.course)
     purchasedCourses: PurchasedCoursesEntity[]
