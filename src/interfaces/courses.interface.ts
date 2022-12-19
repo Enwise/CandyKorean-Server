@@ -12,4 +12,5 @@ export interface Course {
     date_updated: Date,
     level: Level,
     tutor: Tutor,
+    is_wishlist: boolean,
 }
