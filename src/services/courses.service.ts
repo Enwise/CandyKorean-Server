@@ -56,7 +56,6 @@ class CoursesService {
             price: courseData.price,
             category: courseData.category,
             view_count: courseData.view_count,
-            is_wishlist: courseData.is_wishlist,
             level: findLevel
         });
 
