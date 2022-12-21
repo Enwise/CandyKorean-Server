@@ -19,10 +19,6 @@ export class CreateCourseDto {
     @IsNumber()
     public view_count: number
 
-    @Type(()=>Boolean)
-    @IsNumber()
-    public is_wishlist: boolean
-
     @IsString()
     public level_id: string
 
