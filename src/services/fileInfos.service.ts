@@ -3,7 +3,7 @@ import {FileInfosEntity} from "../entities/fileInfos.entity";
 
 class FileInfosService {
     public async uploadFileToS3(fileData: any): Promise<FileInfo> {
-        const createFileInfo: FileInfo = await FileInfosEntity.create({link:fileData.location, fileName:fileData.originalname});
+        const createFileInfo: FileInfo = await FileInfosEntity.create({link:fileData.location, fileName:fileData.originalname}).save();
 
         return createFileInfo;
     }
