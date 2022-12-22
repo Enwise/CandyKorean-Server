@@ -35,6 +35,7 @@ export class CreateUserDto {
   @IsDate()
   public date_last_login: Date;
 
+  @Type(() => Number)
   @IsNumber()
   public continuous_attendance: number;
 }
