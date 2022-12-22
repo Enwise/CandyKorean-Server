@@ -16,7 +16,7 @@ export const upload = multer({
         bucket: AWS_BUCKET_NAME,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         key: (req, file, cb) => {
-            cb(null, "files/" + Date.now() + "/" + file.originalname);
+            cb(null, "files/" + Date.now() + "." + file.originalname);
         }
     })
 });
