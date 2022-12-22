@@ -5,7 +5,7 @@ import validationMiddleware from "../middlewares/validation.middleware";
 import {CreateSlideDto} from "../dtos/slides.dto";
 
 class SlidesRoute implements Routes {
-    public path = '/class';
+    public path = '/slide';
     public router = Router();
     public slidesController = new SlidesController();
 
