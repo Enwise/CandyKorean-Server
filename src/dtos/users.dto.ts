@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsEmail, IsString } from "class-validator";
+import { IsArray, IsDate, IsEmail, IsNumber, IsString } from "class-validator";
 
 export class CreateUserDto {
   @IsString()
@@ -30,4 +30,10 @@ export class CreateUserDto {
 
   @IsString()
   public survey_answers: string;
+
+  @IsDate()
+  public date_last_login: Date;
+
+  @IsNumber()
+  public continuous_attendance: number;
 }
