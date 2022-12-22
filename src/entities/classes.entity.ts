@@ -25,6 +25,9 @@ export class ClassesEntity extends BaseEntity implements Class {
     @UpdateDateColumn()
     date_updated: Date
 
+    @Column()
+    course_id: number
+
     @JoinColumn({name:"course_id"})
     @ManyToOne(()=>CourseEntity, (course)=>course.classes)
     course: CourseEntity;
