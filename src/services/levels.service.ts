@@ -9,16 +9,14 @@ import {TutorEntity} from "../entities/tutors.entity";
 
 class LevelsService {
     public async findAllLevels(): Promise<Level[]> {
-        const levels: Level[] = await AppDataSource.getRepository(LevelEntity).find({
-            relations: {tutor: true,}
-        })
+        const levels: Level[] = await AppDataSource.getRepository(LevelEntity).find();
         return levels
     }
 
     public async findLevelById(levelId: number) {
         if (isEmpty(levelId)) throw new HttpException(400, "LevelId is empty");
 
-        const findLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}, relations: {tutor: true,}})
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}})
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
         return findLevel;
@@ -30,10 +28,7 @@ class LevelsService {
         const findLevel: Level = await LevelEntity.findOne({where: {name: levelData.name}});
         if (findLevel) throw new HttpException(409, `this level name ${levelData.name} already exists`);
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(levelData.tutor_id)}});
-        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
-
-        const createLevelData: Level = await LevelEntity.create({...levelData, tutor: findTutor}).save();
+        const createLevelData: Level = await LevelEntity.create({...levelData}).save();
 
         return createLevelData;
     }
@@ -44,10 +39,7 @@ class LevelsService {
         const findLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(levelData.tutor_id)}});
-        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
-
-        await LevelEntity.update(levelId, {name: levelData.name, info: levelData.info, tutor: findTutor, enabled: levelData.enabled});
+        await LevelEntity.update(levelId, {name: levelData.name, info: levelData.info, enabled: levelData.enabled});
 
         const updateLevel: Level = await LevelEntity.findOne({where: {level_id: levelId}});
 

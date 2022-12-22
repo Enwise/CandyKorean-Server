@@ -39,13 +39,19 @@ export class CourseEntity extends BaseEntity implements Course {
     @UpdateDateColumn()
     date_updated: Date
 
-    @JoinColumn({name: "level_id"})
-    @ManyToOne(() => LevelEntity, (level) => level.courses)
-    level: LevelEntity
+    @Column()
+    tutor_id: number
+
+    @Column()
+    level_id: number
     
     @JoinColumn({name:"tutor_id"})
-    @OneToOne(() => TutorEntity)
+    @ManyToOne(() => TutorEntity)
     tutor: TutorEntity
+
+    @JoinColumn({name:"level_id"})
+    @ManyToOne(() => LevelEntity)
+    level: LevelEntity
 
     @OneToMany(() => ClassesEntity, (classes) => classes.course)
     classes: ClassesEntity[] 

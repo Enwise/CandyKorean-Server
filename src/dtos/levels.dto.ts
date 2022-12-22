@@ -1,4 +1,4 @@
-import {IsNumber, IsString, IsBoolean} from "class-validator";
+import {IsString, IsBoolean} from "class-validator";
 import {Type} from "class-transformer";
 
 export class CreateLevelDto {
@@ -7,10 +7,6 @@ export class CreateLevelDto {
 
     @IsString()
     public info: string;
-
-    @Type(()=>Number)
-    @IsNumber()
-    public tutor_id: number;
 
     @Type(()=>Boolean)
     @IsBoolean()
