@@ -19,9 +19,11 @@ export class CreateCourseDto {
     @IsNumber()
     public view_count: number
 
-    @IsString()
-    public level_id: string
+    @Type(()=>Number)
+    @IsNumber()
+    public level_id: number
 
-    @IsString()
-    public tutor_id: string
+    @Type(()=>Number)
+    @IsNumber()
+    public tutor_id: number
 }

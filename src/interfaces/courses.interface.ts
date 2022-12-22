@@ -1,5 +1,5 @@
-import {Level} from "./levels.interfaces";
 import {Tutor} from './tutors.interface';
+import {Level} from "./levels.interfaces";
 
 export interface Course {
     course_id: number,
@@ -10,6 +10,6 @@ export interface Course {
     view_count: number,
     date_created: Date,
     date_updated: Date,
-    level: Level,
     tutor: Tutor,
+    level: Level
 }

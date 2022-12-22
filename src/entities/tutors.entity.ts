@@ -2,6 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn
 import {Tutor} from "../interfaces/tutors.interface";
 import {UserEntity} from "./users.entity";
 import {LevelEntity} from "./levels.entity";
+import {CourseEntity} from "./courses.entity";
 
 @Entity('tutor')
 export class TutorEntity extends BaseEntity implements Tutor {
@@ -24,6 +25,6 @@ export class TutorEntity extends BaseEntity implements Tutor {
     @JoinColumn({name:"user_id"})
     user: UserEntity
 
-    @OneToMany(()=>LevelEntity, (levels) => levels.tutor)
-    levels: LevelEntity[]
+    @OneToMany(()=>CourseEntity, (courses) => courses.tutor)
+    courses: CourseEntity[]
 }
