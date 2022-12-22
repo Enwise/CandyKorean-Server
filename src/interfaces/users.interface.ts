@@ -13,4 +13,6 @@ export interface User {
   survey_answers: string;
   date_created: Date;
   date_updated: Date;
+  date_last_login: Date;
+  continuous_attendance: number;
 }

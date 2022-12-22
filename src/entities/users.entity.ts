@@ -58,6 +58,12 @@ export class UserEntity extends BaseEntity implements User {
   @UpdateDateColumn()
   date_updated: Date;
 
+  @Column()
+  date_last_login: Date;
+
+  @Column({ default: 1 })
+  continuous_attendance: number;
+
   @OneToOne(() => TutorEntity)
   tutors: TutorEntity[];
 
