@@ -3,10 +3,10 @@ import {Type} from "class-transformer";
 
 export class CreateQuizDto {
     @IsString()
-    public question: string
+    public style: string
 
     @IsString()
-    public answer: string
+    public json: string
 
     @Type(()=>Number)
     @IsNumber()
