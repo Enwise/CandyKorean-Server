@@ -11,7 +11,7 @@ import {LevelEntity} from "../entities/levels.entity";
 
 class CoursesService {
     public async findAllCourses(): Promise<Course[]> {
-        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({relations: {level: true}});
+        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({relations: {level: true, tutor:true}});
         return courses;
     }
 
