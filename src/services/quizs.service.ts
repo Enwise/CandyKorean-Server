@@ -55,7 +55,7 @@ class QuizsService {
         const findQuiz: Quiz = await QuizsEntity.findOne({where: {quiz_id: quizId}});
         if (!findQuiz) throw new HttpException(409, "Quiz doesn't exist");
 
-        await ContentsEntity.delete(quizId);
+        await QuizsEntity.delete(quizId);
 
         return findQuiz;
     }
