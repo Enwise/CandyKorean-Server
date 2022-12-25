@@ -11,4 +11,8 @@ export class CreateClassesDto {
 
   @IsString()
   public thumbnail: string;
+
+  @Type(() => Number)
+  @IsNumber()
+  public unit: number;
 }

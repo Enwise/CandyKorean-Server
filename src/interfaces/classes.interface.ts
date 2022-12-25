@@ -7,4 +7,5 @@ export interface Class {
   date_updated: Date;
   course: Course;
   thumbnail: string;
+  unit: number;
 }
