@@ -47,10 +47,10 @@ class CoursesService {
         const findCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
         if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        const findLevel: Level = await LevelEntity.findOne({where: {level_id: Number(courseData.level_id)}});
+        const findLevel: Level = await LevelEntity.findOne({where: {level_id: courseData.level_id}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(courseData.tutor_id)}});
+        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: courseData.tutor_id}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         await CourseEntity.update(courseId, {
@@ -59,6 +59,7 @@ class CoursesService {
             price: courseData.price,
             category: courseData.category,
             view_count: courseData.view_count,
+            thumbnail: courseData.thumbnail,
             level: findLevel,
             tutor: findTutor
         });
