@@ -1,12 +1,14 @@
 import {IsBoolean, IsNumber, IsString} from "class-validator";
-import {Type} from "class-transformer";
+import {Transform, Type} from "class-transformer";
 
 export class CreateLearnedClassDto {
     @Type(()=>Number)
     @IsNumber()
     learn_time: number
 
+    @Transform(({ value} ) => value === 'true')
     @IsBoolean()
+
     is_completed: boolean
 
     @Type(()=>Number)
