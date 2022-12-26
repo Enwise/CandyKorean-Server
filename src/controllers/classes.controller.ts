@@ -27,6 +27,17 @@ class ClassesController {
         }
     }
 
+    public getClassesCountByCourseId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const countData: number = await this.classesService.getClassesCountByCourse(courseId);
+
+            res.status(200).json({data: countData, message: 'findOne'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public createClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const classData: CreateClassesDto = req.body;
