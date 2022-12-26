@@ -3,7 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity, JoinColumn,
-    ManyToOne, OneToMany,
+    ManyToOne, OneToMany, PrimaryColumn,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -43,6 +43,9 @@ export class ContentsEntity extends BaseEntity implements Content{
 
     @UpdateDateColumn()
     date_updated: Date
+
+    @Column()
+    class_id: number
 
     @JoinColumn({name: "class_id"})
     @ManyToOne(()=>ClassesEntity, (class_entity) => class_entity.contents)
