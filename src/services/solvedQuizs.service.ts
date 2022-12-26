@@ -50,11 +50,10 @@ class SolvedQuizsService {
             }
         });
         if (!findSolvedQuiz) throw new HttpException(409, "SolvedQuiz doesn't exist");
-
         await SolvedQuizsEntity.update({
             user_id: solvedQuizData.user_id,
             quiz_id: solvedQuizData.quiz_id
-        }, solvedQuizData);
+        }, {is_correct: Boolean(Number(solvedQuizData.is_correct))});
 
         const updateSolvedQuiz: SolvedQuiz = await SolvedQuizsEntity.findOne({
             where: {

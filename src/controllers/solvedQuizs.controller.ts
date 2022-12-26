@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {SolvedQuiz} from "../interfaces/solvedQuiz.interface";
 import SolvedQuizsService from "../services/solvedQuizs.service";
+import {CreateSolvedQuizDto} from "../dtos/solvedQuizs.dto";
 
 class SolvedQuizsController {
     public solvedQuizService = new SolvedQuizsService();
@@ -28,7 +29,7 @@ class SolvedQuizsController {
 
     public createSolvedQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const solvedQuizData = req.body;
+            const solvedQuizData:CreateSolvedQuizDto = req.body;
             const createSolvedQuizData: SolvedQuiz = await this.solvedQuizService.createSolvedQuiz(solvedQuizData);
 
             res.status(201).json({data: createSolvedQuizData, message: 'created'});
@@ -39,7 +40,7 @@ class SolvedQuizsController {
 
     public updateSolvedQuiz = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const solvedQuizData = req.body;
+            const solvedQuizData:CreateSolvedQuizDto = req.body;
             const updateSolvedQuizData: SolvedQuiz = await this.solvedQuizService.updateSolvedQuiz(solvedQuizData);
 
             res.status(200).json({data: updateSolvedQuizData, message: 'updated'});
