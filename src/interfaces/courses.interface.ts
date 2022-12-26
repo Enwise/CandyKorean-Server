@@ -13,4 +13,5 @@ export interface Course {
   tutor: Tutor;
   level: Level;
   thumbnail: string;
+  total_unit: number;
 }

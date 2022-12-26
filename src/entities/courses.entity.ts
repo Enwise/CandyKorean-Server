@@ -52,6 +52,9 @@ export class CourseEntity extends BaseEntity implements Course {
   @Column()
   thumbnail: string;
 
+  @Column()
+  total_unit: number;
+
   @JoinColumn({ name: "tutor_id" })
   @ManyToOne(() => TutorEntity)
   tutor: TutorEntity;

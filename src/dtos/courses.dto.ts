@@ -29,4 +29,10 @@ export class CreateCourseDto {
 
   @IsString()
   public thumbnail: string;
+
+  @Type(() => Number)
+  @IsNumber()
+  public total_unit: number;
+
+
 }
