@@ -54,7 +54,7 @@ class WishlistService {
             }
         });
 
-        if (findWishlist) throw new HttpException(409, "This wishlist is already exists");
+        if (!findWishlist) throw new HttpException(409, "This wishlist is not exists");
 
         await WishListEntity.delete(findWishlist);
 
