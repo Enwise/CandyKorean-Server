@@ -22,6 +22,16 @@ class ClassesService {
         return findClass;
     }
 
+    public async getClassesCountByCourse(courseId: number): Promise<number> {
+        if (isEmpty(courseId)) throw new HttpException(400, "courseId is empty");
+
+        const count = await ClassesEntity
+            .createQueryBuilder("class")
+            .where("class.course_id= :courseId", {courseId:courseId})
+            .getCount()
+        return count;
+    }
+
     public async createClass(classData: CreateClassesDto): Promise<Class> {
         if (isEmpty(classData)) throw new HttpException(400, "ClassData is empty");
 
