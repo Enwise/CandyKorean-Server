@@ -11,6 +11,7 @@ import {
 import { User } from "../interfaces/users.interface";
 import { TutorEntity } from "./tutors.entity";
 import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
+import {WishListEntity} from "./wishlist.entity";
 
 @Entity("user")
 export class UserEntity extends BaseEntity implements User {
@@ -72,4 +73,10 @@ export class UserEntity extends BaseEntity implements User {
     (purchasedCourse) => purchasedCourse.user
   )
   purchasedCourses: PurchasedCoursesEntity[];
+
+  @OneToMany(
+      () => WishListEntity,
+      (wishlist) => wishlist.user
+  )
+  wishlists: WishListEntity[];
 }
