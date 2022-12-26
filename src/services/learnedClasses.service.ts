@@ -5,10 +5,10 @@ import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateLearnedClassDto} from "../dtos/learnedClasses.dto";
 
-class LearnedClassesService{
-    public async findAllLearnedClass():Promise<LearnedClasses[]>{
+class LearnedClassesService {
+    public async findAllLearnedClass(): Promise<LearnedClasses[]> {
         const learnedClasses: LearnedClasses[] = await AppDataSource.getRepository(LearnedClassesEntity).find({
-            relations:{
+            relations: {
                 user: true,
                 class: true
             }
@@ -43,7 +43,10 @@ class LearnedClassesService{
         });
         if (!findLearnedClass) throw new HttpException(409, "learnedClassData is not exist");
 
-        await LearnedClassesEntity.update(findLearnedClass,{...learnedClassData});
+        await LearnedClassesEntity.update({
+            user_id: learnedClassData.user_id,
+            class_id: learnedClassData.class_id
+        }, {...learnedClassData});
 
         const updateLearnedClassData: LearnedClasses = await LearnedClassesEntity.findOne({
             where: {

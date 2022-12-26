@@ -2,6 +2,7 @@ import LearnedClassesService from "../services/learnedClasses.service";
 import {NextFunction, Request, Response} from "express";
 import {LearnedClasses} from "../interfaces/learnedClasses.interface";
 import {CreateLearnedClassDto} from "../dtos/learnedClasses.dto";
+import {plainToInstance} from "class-transformer";
 
 class LearnedClassesController {
     public learnedClassesService = new LearnedClassesService();
@@ -29,7 +30,7 @@ class LearnedClassesController {
 
     public updateLearnedClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const learnedClassData: CreateLearnedClassDto = req.body;
+            const learnedClassData: CreateLearnedClassDto = plainToInstance(CreateLearnedClassDto,req.body);
             const updateLearnedClassData: LearnedClasses = await this.learnedClassesService.updateLearnedClass(learnedClassData);
 
             res.status(200).json({data: updateLearnedClassData, message: 'findAll'});

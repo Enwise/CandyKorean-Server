@@ -53,7 +53,7 @@ class SolvedQuizsService {
         await SolvedQuizsEntity.update({
             user_id: solvedQuizData.user_id,
             quiz_id: solvedQuizData.quiz_id
-        }, {is_correct: Boolean(Number(solvedQuizData.is_correct))});
+        }, {...solvedQuizData});
 
         const updateSolvedQuiz: SolvedQuiz = await SolvedQuizsEntity.findOne({
             where: {
