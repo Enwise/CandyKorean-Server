@@ -1,5 +1,5 @@
 import {IsBoolean, IsNumber} from "class-validator";
-import {Type} from "class-transformer";
+import {Transform, Type} from "class-transformer";
 
 export class CreateSolvedQuizDto{
     @Type(()=>Number)
@@ -10,7 +10,7 @@ export class CreateSolvedQuizDto{
     @IsNumber()
     quiz_id: number
 
-    @Type(()=>Boolean)
     @IsBoolean()
+    @Transform(({ value} ) => value === 'true')
     is_correct: boolean
 }
