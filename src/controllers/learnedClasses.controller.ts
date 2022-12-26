@@ -26,6 +26,17 @@ class LearnedClassesController {
             next(error);
         }
     }
+
+    public updateLearnedClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const learnedClassData: CreateLearnedClassDto = req.body;
+            const updateLearnedClassData: LearnedClasses = await this.learnedClassesService.updateLearnedClass(learnedClassData);
+
+            res.status(200).json({data: updateLearnedClassData, message: 'findAll'});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default LearnedClassesController;

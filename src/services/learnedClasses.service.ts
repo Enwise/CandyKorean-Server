@@ -25,11 +25,33 @@ class LearnedClassesService{
                 class_id: learnedClassData.class_id
             }
         });
-        if (findLearnedClass) throw new HttpException(409, "This purchasedCourse is already exists");
+        if (findLearnedClass) throw new HttpException(409, "This learnedClassData is already exists");
 
         const createFindLearnedClassData: LearnedClasses = await LearnedClassesEntity.create({...learnedClassData}).save();
 
         return createFindLearnedClassData;
+    }
+
+    public async updateLearnedClass(learnedClassData: CreateLearnedClassDto): Promise<LearnedClasses> {
+        if (isEmpty(learnedClassData)) throw new HttpException(400, "learnedClassData is empty");
+
+        const findLearnedClass: LearnedClasses = await LearnedClassesEntity.findOne({
+            where: {
+                user_id: learnedClassData.user_id,
+                class_id: learnedClassData.class_id
+            }
+        });
+        if (!findLearnedClass) throw new HttpException(409, "learnedClassData is not exist");
+
+        await LearnedClassesEntity.update(findLearnedClass,{...learnedClassData});
+
+        const updateLearnedClassData: LearnedClasses = await LearnedClassesEntity.findOne({
+            where: {
+                user_id: learnedClassData.user_id,
+                class_id: learnedClassData.class_id
+            }
+        });
+        return updateLearnedClassData;
     }
 }
 

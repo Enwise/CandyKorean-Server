@@ -16,6 +16,7 @@ class LearnedClassesRoute implements Routes {
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.learnedClassesController.getLearnedClasses);
         this.router.post(`${this.path}`, validationMiddleware(CreateLearnedClassDto), this.learnedClassesController.createLearnedClass);
+        this.router.put(`${this.path}`, validationMiddleware(CreateLearnedClassDto), this.learnedClassesController.updateLearnedClass);
     }
 }
 
