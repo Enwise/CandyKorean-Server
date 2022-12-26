@@ -59,8 +59,10 @@ class TutorsService {
         const findTutor: Tutor = await  TutorEntity.findOne({where: {tutor_id:tutorId}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
-        await TutorEntity.update(tutorId,{enabled: true});
-        return findTutor;
+        await TutorEntity.update(tutorId,{enabled: false});
+
+        const deleteTutor: Tutor = await  TutorEntity.findOne({where: {tutor_id:tutorId}});
+        return deleteTutor;
     }
 }
 
