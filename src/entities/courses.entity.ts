@@ -15,6 +15,7 @@ import { TutorEntity } from "./tutors.entity";
 import { LevelEntity } from "./levels.entity";
 import { ClassesEntity } from "./classes.entity";
 import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
+import {WishListEntity} from "./wishlist.entity";
 
 @Entity("course")
 export class CourseEntity extends BaseEntity implements Course {
@@ -67,4 +68,7 @@ export class CourseEntity extends BaseEntity implements Course {
     (purchasedCourse) => purchasedCourse.course
   )
   purchasedCourses: PurchasedCoursesEntity[];
+
+  @OneToMany(() => WishListEntity, (wishlist) => wishlist.course)
+  wishlists: WishListEntity[]
 }
