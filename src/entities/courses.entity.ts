@@ -25,7 +25,7 @@ export class CourseEntity extends BaseEntity implements Course {
   @Column()
   name: string;
 
-  @Column()
+  @Column("double")
   price: number;
 
   @Column()
