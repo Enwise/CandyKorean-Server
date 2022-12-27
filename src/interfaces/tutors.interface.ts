@@ -7,4 +7,5 @@ export interface Tutor {
   user: User;
   img_url: string;
   profile_url: string;
+  introduction: string;
 }

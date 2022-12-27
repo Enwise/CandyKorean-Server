@@ -21,6 +21,9 @@ export class TutorEntity extends BaseEntity implements Tutor {
     @Column()
     profile_url: string
 
+    @Column()
+    introduction: string
+
     @OneToOne(() => UserEntity)
     @JoinColumn({name:"user_id"})
     user: UserEntity

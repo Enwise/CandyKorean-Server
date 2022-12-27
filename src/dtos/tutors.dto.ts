@@ -14,4 +14,7 @@ export class CreateTutorDto {
 
     @IsString()
     public profile_url: string;
+
+    @IsString()
+    public introduction: string;
 }
