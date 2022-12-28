@@ -8,7 +8,6 @@ export class CreateLearnedClassDto {
 
     @Transform(({ value} ) => value === 'true')
     @IsBoolean()
-
     is_completed: boolean
 
     @Type(()=>Number)
