@@ -72,16 +72,7 @@ class CoursesService {
         const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: courseData.tutor_id}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
-        await CourseEntity.update(courseId, {
-            name: courseData.name,
-            info: courseData.info,
-            price: courseData.price,
-            category: courseData.category,
-            view_count: courseData.view_count,
-            thumbnail: courseData.thumbnail,
-            level: findLevel,
-            tutor: findTutor
-        });
+        await CourseEntity.update(courseId, {...courseData});
 
         const updateCourse: Course = await CourseEntity.findOne({where: {course_id: courseId}});
 
