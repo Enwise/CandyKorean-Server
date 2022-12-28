@@ -2,6 +2,7 @@ import CoursesService from "../services/courses.service";
 import {NextFunction, Request, Response} from "express";
 import {Course} from "../interfaces/courses.interface";
 import {CreateCourseDto} from "../dtos/courses.dto";
+import {plainToInstance} from "class-transformer";
 
 class CoursesController {
     public courseService = new CoursesService();
@@ -39,7 +40,7 @@ class CoursesController {
 
     public createCourse = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const courseData: CreateCourseDto = req.body;
+            const courseData: CreateCourseDto = plainToInstance(CreateCourseDto, req.body) ;
             const createCourseData: Course = await this.courseService.createCourse(courseData);
 
             res.status(201).json({data: createCourseData, message: 'created'});
