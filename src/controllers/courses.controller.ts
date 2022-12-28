@@ -16,6 +16,16 @@ class CoursesController {
         }
     }
 
+    public getPremiumCourses = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const findPremiumCoursesData: Course[] = await this.courseService.findPremiumCourses();
+
+            res.status(200).json({data:findPremiumCoursesData, message:'findAll'});
+        } catch (error) {
+            next(error)
+        }
+    }
+
     public getCourseById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const courseId = Number(req.params.id);
