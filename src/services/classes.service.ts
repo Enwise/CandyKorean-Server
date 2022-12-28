@@ -22,6 +22,15 @@ class ClassesService {
         return findClass;
     }
 
+    public async findClassesByCourseId(courseId: number): Promise<Class[]> {
+        if (isEmpty(courseId)) throw new HttpException(400, "classId is empty");
+
+        const findClasses: Class[] = await ClassesEntity.find({where: {course_id: courseId}, relations: {course: true}})
+        if (!findClasses) throw new HttpException(409, "Class doesn't exist");
+
+        return findClasses;
+    }
+
     public async getClassesCountByCourse(courseId: number): Promise<number> {
         if (isEmpty(courseId)) throw new HttpException(400, "courseId is empty");
 

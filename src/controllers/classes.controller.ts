@@ -16,6 +16,17 @@ class ClassesController {
         }
     }
 
+    public getClassesByCourseId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const findClassesDataByCourseId: Class[] = await this.classesService.findClassesByCourseId(courseId);
+
+            res.status(200).json({data: findClassesDataByCourseId, message: 'findAll'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public getClassById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const classId = Number(req.params.id);
