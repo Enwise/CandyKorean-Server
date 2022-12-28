@@ -17,6 +17,16 @@ class LearnedClassesController {
         }
     }
 
+    public getPremiumLearnedClasses = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const findPremiumLearnedClasses: LearnedClasses[] = await this.learnedClassesService.findPremiumLearnedClass();
+
+            res.status(200).json({data: findPremiumLearnedClasses, message: 'findAll'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public createLearnedClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const learnedClassData: CreateLearnedClassDto = req.body;

@@ -16,6 +16,17 @@ class LearnedClassesService {
         return learnedClasses;
     }
 
+    public async findPremiumLearnedClass(): Promise<LearnedClasses[]> {
+        const learnedClasses: LearnedClasses[] = await LearnedClassesEntity
+            .createQueryBuilder("learned_class")
+            .select('learned_class.*')
+            .leftJoin("learned_class.class","class")
+            .leftJoin("class.course","course")
+            .where("course.is_premium = true")
+            .getRawMany<LearnedClasses>();
+        return learnedClasses;
+    }
+
     public async createLearnedClass(learnedClassData: CreateLearnedClassDto): Promise<LearnedClasses> {
         if (isEmpty(learnedClassData)) throw new HttpException(400, "learnedClassData is empty");
 
