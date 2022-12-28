@@ -1,5 +1,5 @@
-import { IsNumber, IsString } from "class-validator";
-import { Type } from "class-transformer";
+import {IsBoolean, IsNumber, IsString} from "class-validator";
+import {Transform, Type} from "class-transformer";
 
 export class CreateCourseDto {
   @IsString()
@@ -29,4 +29,8 @@ export class CreateCourseDto {
 
   @IsString()
   public thumbnail: string;
+
+  @Transform(({ value} ) => value === 'true')
+  @IsBoolean()
+  is_premium: boolean
 }

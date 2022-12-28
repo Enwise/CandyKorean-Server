@@ -1,5 +1,5 @@
-import { TutorEntity } from './../entities/tutors.entity';
-import { Tutor } from '../interfaces/tutors.interface';
+import {TutorEntity} from './../entities/tutors.entity';
+import {Tutor} from '../interfaces/tutors.interface';
 import {Course} from "../interfaces/courses.interface";
 import {AppDataSource} from "../config/data-source";
 import {CourseEntity} from "../entities/courses.entity";
@@ -11,7 +11,22 @@ import {LevelEntity} from "../entities/levels.entity";
 
 class CoursesService {
     public async findAllCourses(): Promise<Course[]> {
-        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({relations: {level: true, tutor:true}});
+        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({
+            relations: {
+                level: true,
+                tutor: true
+            }, where: {is_premium: false}
+        });
+        return courses;
+    }
+
+    public async findPremiumCourses(): Promise<Course[]> {
+        const courses: Course[] = await AppDataSource.getRepository(CourseEntity).find({
+            relations: {
+                level: true,
+                tutor: true
+            }, where: {is_premium: true}
+        });
         return courses;
     }
 
@@ -36,7 +51,11 @@ class CoursesService {
         const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(courseData.tutor_id)}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
-        const createCourseData: Course = await CourseEntity.create({...courseData, level: findLevel, tutor: findTutor}).save();
+        const createCourseData: Course = await CourseEntity.create({
+            ...courseData,
+            level: findLevel,
+            tutor: findTutor
+        }).save();
 
         return createCourseData;
     }

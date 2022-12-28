@@ -2,6 +2,7 @@ import CoursesService from "../services/courses.service";
 import {NextFunction, Request, Response} from "express";
 import {Course} from "../interfaces/courses.interface";
 import {CreateCourseDto} from "../dtos/courses.dto";
+import {plainToInstance} from "class-transformer";
 
 class CoursesController {
     public courseService = new CoursesService();
@@ -11,6 +12,16 @@ class CoursesController {
             const findAllCoursesData: Course[] = await this.courseService.findAllCourses();
 
             res.status(200).json({data:findAllCoursesData, message:'findAll'});
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getPremiumCourses = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const findPremiumCoursesData: Course[] = await this.courseService.findPremiumCourses();
+
+            res.status(200).json({data:findPremiumCoursesData, message:'findAll'});
         } catch (error) {
             next(error)
         }
@@ -29,7 +40,7 @@ class CoursesController {
 
     public createCourse = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const courseData: CreateCourseDto = req.body;
+            const courseData: CreateCourseDto = plainToInstance(CreateCourseDto, req.body) ;
             const createCourseData: Course = await this.courseService.createCourse(courseData);
 
             res.status(201).json({data: createCourseData, message: 'created'});

@@ -16,6 +16,7 @@ class ClassesRoute implements Routes {
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.classesController.getClasses);
         this.router.get(`${this.path}/:id(\\d+)`, this.classesController.getClassById);
+        this.router.get(`${this.path}/course/:id(\\d+)`, this.classesController.getClassesByCourseId);
         this.router.get(`${this.path}/count/:id(\\d+)`, this.classesController.getClassesCountByCourseId);
         this.router.post(`${this.path}`, validationMiddleware(CreateClassesDto), this.classesController.createClass);
         this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateClassesDto), this.classesController.updateClass);

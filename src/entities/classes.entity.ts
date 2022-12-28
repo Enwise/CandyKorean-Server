@@ -35,6 +35,7 @@ export class ClassesEntity extends BaseEntity implements Class {
 
   @Column()
   unit: number;
+
   @JoinColumn({ name: "course_id" })
   @ManyToOne(() => CourseEntity, (course) => course.classes)
   course: CourseEntity;
