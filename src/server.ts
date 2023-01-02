@@ -13,6 +13,7 @@ import LearnedClassesRoute from "./routes/learnedClasses.route";
 import SolvedQuizsRoute from "./routes/solvedQuizs.route";
 import FileInfosRoute from "./routes/fileInfos.route";
 import WishlistRoute from "./routes/wishlist.route";
+import NoticeRoute from "./routes/notice.route";
 
 const app = new App([
     new UsersRoute(),
@@ -28,7 +29,8 @@ const app = new App([
     new LearnedClassesRoute(),
     new SolvedQuizsRoute(),
     new FileInfosRoute(),
-    new WishlistRoute()
+    new WishlistRoute(),
+    new NoticeRoute()
 ]);
 
 app.listen()
