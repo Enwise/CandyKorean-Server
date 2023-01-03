@@ -14,6 +14,7 @@ import SolvedQuizsRoute from "./routes/solvedQuizs.route";
 import FileInfosRoute from "./routes/fileInfos.route";
 import WishlistRoute from "./routes/wishlist.route";
 import NoticeRoute from "./routes/notice.route";
+import FeedbackRoute from "./routes/feedback.route";
 
 const app = new App([
     new UsersRoute(),
@@ -30,7 +31,8 @@ const app = new App([
     new SolvedQuizsRoute(),
     new FileInfosRoute(),
     new WishlistRoute(),
-    new NoticeRoute()
+    new NoticeRoute(),
+    new FeedbackRoute()
 ]);
 
 app.listen()

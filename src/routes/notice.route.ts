@@ -5,7 +5,7 @@ import NoticeController from "../controllers/notice.controller";
 import {CreateNoticeDto} from "../dtos/notice.dto";
 
 class NoticeRoute implements Routes{
-    public path = '/level';
+    public path = '/notice';
     public router = Router();
     public noticeController = new NoticeController();
 

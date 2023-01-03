@@ -1,6 +1,7 @@
-import {BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {Notice} from "../interfaces/notice.interface";
 
+@Entity('Notice')
 export class NoticeEntity extends BaseEntity implements Notice {
     @PrimaryGeneratedColumn()
     notice_id: number
