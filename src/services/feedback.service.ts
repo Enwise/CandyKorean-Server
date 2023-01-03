@@ -23,7 +23,10 @@ class FeedbackService {
     public async findFeedbackByUserId(userId: number): Promise<Feedback[]> {
         if (isEmpty(userId)) throw new HttpException(400, "userId is empty");
 
-        const findFeedBacks: Feedback[] = await FeedbackEntity.find({where: {user_id: userId}});
+        const findFeedBacks: Feedback[] = await FeedbackEntity.find({
+            where: {user_id: userId},
+            relations: {user: true}
+        });
         if (!findFeedBacks) throw new HttpException(409, "Feedback doesn't exist");
 
         return findFeedBacks;
