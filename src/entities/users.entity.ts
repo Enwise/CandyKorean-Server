@@ -62,6 +62,9 @@ export class UserEntity extends BaseEntity implements User {
   @Column()
   date_last_login: Date;
 
+  @Column()
+  img_url: string;
+
   @Column({ default: 1 })
   continuous_attendance: number;
 
