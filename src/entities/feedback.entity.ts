@@ -1,7 +1,8 @@
-import {BaseEntity, Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Feedback} from "../interfaces/feedback.interface";
 import {UserEntity} from "./users.entity";
 
+@Entity('Feedback')
 export class FeedbackEntity extends BaseEntity implements Feedback {
     @PrimaryGeneratedColumn()
     feedback_id: number
