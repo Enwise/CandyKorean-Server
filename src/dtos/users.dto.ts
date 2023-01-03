@@ -38,4 +38,7 @@ export class CreateUserDto {
   @Type(() => Number)
   @IsNumber()
   public continuous_attendance: number;
+
+  @IsString()
+  public img_url: string;
 }

@@ -15,4 +15,5 @@ export interface User {
   date_updated: Date;
   date_last_login: Date;
   continuous_attendance: number;
+  img_url: string;
 }
