@@ -15,6 +15,7 @@ import FileInfosRoute from "./routes/fileInfos.route";
 import WishlistRoute from "./routes/wishlist.route";
 import NoticeRoute from "./routes/notice.route";
 import FeedbackRoute from "./routes/feedback.route";
+import AttendanceRoute from "./routes/attendance.route";
 
 const app = new App([
     new UsersRoute(),
@@ -32,7 +33,8 @@ const app = new App([
     new FileInfosRoute(),
     new WishlistRoute(),
     new NoticeRoute(),
-    new FeedbackRoute()
+    new FeedbackRoute(),
+    new AttendanceRoute()
 ]);
 
 app.listen()
