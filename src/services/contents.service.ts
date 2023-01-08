@@ -22,6 +22,15 @@ class ContentsService {
         return findContent;
     }
 
+    public async findContentByClassId(classId: number): Promise<Content[]> {
+        if (isEmpty(classId)) throw new HttpException(400, "classId is empty");
+
+        const findContents: Content[] = await ContentsEntity.find({where: {class_id: classId}})
+        if (!findContents) throw new HttpException(409, "Content doesn't exist");
+
+        return findContents;
+    }
+
     public async createContent(contentData: CreateContentDto): Promise<Content> {
         if (isEmpty(contentData)) throw new HttpException(400, "ContentData is empty");
 
