@@ -18,10 +18,11 @@ export class SolvedQuizsEntity extends BaseEntity implements SolvedQuiz {
     date_created: Date
 
     @JoinColumn({name: "user_id"})
-    @ManyToOne(() => UserEntity)
+    @ManyToOne(() => UserEntity,{onDelete:"CASCADE"})
+
     user: UserEntity
 
     @JoinColumn({name: "quiz_id"})
-    @ManyToOne(() => QuizsEntity)
+    @ManyToOne(() => QuizsEntity,{onDelete:"CASCADE"})
     quiz: QuizsEntity
 }
