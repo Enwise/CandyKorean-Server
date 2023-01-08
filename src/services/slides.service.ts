@@ -22,6 +22,15 @@ class SlidesService {
         return findSlide;
     }
 
+    public async findSlidesByContentId(contentId: number): Promise<Slide[]> {
+        if (isEmpty(contentId)) throw new HttpException(400, "contentId is empty");
+
+        const findSlides: Slide[] = await SlidesEntity.find({where: {content_id: contentId,}, relations: {content: true}})
+        if (!findSlides) throw new HttpException(409, "Slide doesn't exist");
+
+        return findSlides;
+    }
+
     public async createSlide(slideData: CreateSlideDto): Promise<Slide> {
         if (isEmpty(slideData)) throw new HttpException(400, "SlideData is empty");
 

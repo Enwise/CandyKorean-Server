@@ -16,6 +16,17 @@ class SlidesController {
         }
     }
 
+    public getSlidesByContentId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const contentId = Number(req.params.id);
+            const findSlidesData: Slide[] = await this.slidesService.findSlidesByContentId(contentId);
+
+            res.status(200).json({data: findSlidesData, message: 'findAll'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public getSlideById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const slideId = Number(req.params.id);
