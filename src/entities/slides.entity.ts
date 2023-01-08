@@ -33,6 +33,9 @@ export class SlidesEntity extends BaseEntity implements Slide{
     @UpdateDateColumn()
     date_updated: Date;
 
+    @Column()
+    content_id: number;
+
     @JoinColumn({name:"content_id"})
     @ManyToOne(()=>ContentsEntity, (content)=>content.slides)
     content: ContentsEntity;
