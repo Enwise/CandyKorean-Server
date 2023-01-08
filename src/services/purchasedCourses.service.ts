@@ -19,7 +19,12 @@ class PurchasedCoursesService {
     public async findPurchasedCourseByUserId(userId: number): Promise<PurchasedCourse[]> {
         if (isEmpty(userId)) throw new HttpException(400, "userId is empty");
 
-        const findPurchasedCourses: PurchasedCourse[] = await PurchasedCoursesEntity.find({where: {user_id: userId}});
+        const findPurchasedCourses: PurchasedCourse[] = await PurchasedCoursesEntity
+            .createQueryBuilder("purchased_course")
+            .select("purchased_course.*, course.*")
+            .leftJoin('purchased_course.course',"course")
+            .where(`purchased_course.user_id = ${userId}`)
+            .getRawMany();
         if (!findPurchasedCourses) throw new HttpException(409, "PurchasedCourses don't exist");
 
         return findPurchasedCourses;
