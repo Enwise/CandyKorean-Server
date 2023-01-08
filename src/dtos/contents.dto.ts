@@ -1,5 +1,5 @@
-import {IsNumber, IsString} from "class-validator";
-import {Type} from "class-transformer";
+import {IsBoolean, IsNumber, IsString} from "class-validator";
+import {Transform, Type} from "class-transformer";
 
 export class CreateContentDto {
     @IsString()
@@ -23,7 +23,7 @@ export class CreateContentDto {
     @IsNumber()
     public class_id: number
 
-    @Type(()=>Boolean)
-    @IsNumber()
+    @Transform(({ value} ) => value === 'true')
+    @IsBoolean()
     public is_portrait: boolean
 }
