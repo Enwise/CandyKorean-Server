@@ -16,6 +16,17 @@ class ContentsController {
         }
     }
 
+    public getContentsByClassId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const classId = Number(req.params.id);
+            const findContentsDataByClassId: Content[] = await this.contentsService.findContentByClassId(classId);
+
+            res.status(200).json({data: findContentsDataByClassId, message: 'findAllById'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public getContentById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const contentId = Number(req.params.id);
