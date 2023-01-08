@@ -13,6 +13,9 @@ export class QuizsEntity extends BaseEntity implements Quiz {
     @Column({length: 511})
     json: string;
 
+    @Column()
+    content_id: number;
+
     @JoinColumn({name:"content_id"})
     @ManyToOne(()=>ContentsEntity, (content) => content.quizs)
     content: ContentsEntity;
