@@ -22,6 +22,15 @@ class QuizsService {
         return findQuiz;
     }
 
+    public async findQuizByContentId(contentId: number): Promise<Quiz[]> {
+        if (isEmpty(contentId)) throw new HttpException(400, "contentId is empty");
+
+        const findQuizs: Quiz[] = await QuizsEntity.find({where: {content_id: contentId}})
+        if (!findQuizs) throw new HttpException(409, "Quizs doesn't exist");
+
+        return findQuizs;
+    }
+
     public async createQuiz(quizData: CreateQuizDto): Promise<Quiz> {
         if (isEmpty(quizData)) throw new HttpException(400, "QuizData is empty");
 

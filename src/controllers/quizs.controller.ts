@@ -16,6 +16,17 @@ class QuizsController {
         }
     }
 
+    public getQuizsByContentId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const contentId = Number(req.params.id);
+            const findAllQuizsData: Quiz[] = await this.quizsService.findQuizByContentId(contentId);
+
+            res.status(200).json({data: findAllQuizsData, message: 'findAllByContentId'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public getQuizById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const quizId = Number(req.params.id);
