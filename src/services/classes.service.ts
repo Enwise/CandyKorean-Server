@@ -25,7 +25,11 @@ class ClassesService {
     public async findClassesByCourseId(courseId: number): Promise<Class[]> {
         if (isEmpty(courseId)) throw new HttpException(400, "classId is empty");
 
-        const findClasses: Class[] = await ClassesEntity.find({where: {course_id: courseId}, relations: {course: true}})
+        const findClasses: Class[] = await ClassesEntity.find({
+            where: {course_id: courseId},
+            relations: {course: true},
+            order: {unit: "ASC"}
+        })
         if (!findClasses) throw new HttpException(409, "Class doesn't exist");
 
         return findClasses;
@@ -36,7 +40,7 @@ class ClassesService {
 
         const count = await ClassesEntity
             .createQueryBuilder("class")
-            .where("class.course_id= :courseId", {courseId:courseId})
+            .where("class.course_id= :courseId", {courseId: courseId})
             .getCount()
         return count;
     }
@@ -64,7 +68,12 @@ class ClassesService {
         const findCourse: Course = await CourseEntity.findOne({where: {course_id: classData.course_id}});
         if (!findCourse) throw new HttpException(409, "Course doesn't exist");
 
-        await ClassesEntity.update(classId, {name:classData.name, course_id: classData.course_id, thumbnail: classData.thumbnail, unit: classData.unit });
+        await ClassesEntity.update(classId, {
+            name: classData.name,
+            course_id: classData.course_id,
+            thumbnail: classData.thumbnail,
+            unit: classData.unit
+        });
 
         const updateClass: Class = await ClassesEntity.findOne({where: {class_id: classId}});
 
