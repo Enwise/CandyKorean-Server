@@ -86,7 +86,7 @@ class ClassesService {
         const findClass: Class = await ClassesEntity.findOne({where: {class_id: classId}});
         if (!findClass) throw new HttpException(409, "Class doesn't exist");
 
-        await CourseEntity.delete(classId);
+        await ClassesEntity.delete(classId);
 
         return findClass;
     }
