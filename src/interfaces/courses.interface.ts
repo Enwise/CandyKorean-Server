@@ -14,4 +14,5 @@ export interface Course {
   level: Level;
   thumbnail: string;
   is_premium: boolean;
+  is_can_add_slide: boolean;
 }

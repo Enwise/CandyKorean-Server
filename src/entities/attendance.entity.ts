@@ -10,7 +10,7 @@ export class AttendanceEntity extends BaseEntity implements Attendance {
     @Column()
     user_id: number;
 
-    @CreateDateColumn({type:"date"})
+    @CreateDateColumn()
     data_created: Date;
 
     @ManyToOne(() => UserEntity)
