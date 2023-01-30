@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { User } from "../interfaces/users.interface";
-import { TutorEntity } from "./tutors.entity";
+import { TeacherEntity } from "./teachers.entity";
 import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
 import {WishListEntity} from "./wishlist.entity";
 
@@ -68,8 +68,8 @@ export class UserEntity extends BaseEntity implements User {
   @Column({ default: 1 })
   continuous_attendance: number;
 
-  @OneToOne(() => TutorEntity)
-  tutors: TutorEntity[];
+  @OneToOne(() => TeacherEntity)
+  tutors: TeacherEntity[];
 
   @OneToMany(
     () => PurchasedCoursesEntity,

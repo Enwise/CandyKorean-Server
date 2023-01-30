@@ -1,6 +1,6 @@
 import App from './app'
 import UsersRoute from "./routes/users.route";
-import TutorsRoute from "./routes/tutors.route";
+import TeachersRoute from "./routes/teachers.route";
 import LevelsRoute from "./routes/levels.route";
 import CoursesRoute from "./routes/courses.route";
 import ClassesRoute from "./routes/classes.route";
@@ -19,7 +19,7 @@ import AttendanceRoute from "./routes/attendance.route";
 
 const app = new App([
     new UsersRoute(),
-    new TutorsRoute(),
+    new TeachersRoute(),
     new LevelsRoute(),
     new CoursesRoute(),
     new ClassesRoute(),

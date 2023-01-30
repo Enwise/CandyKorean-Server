@@ -1,5 +1,5 @@
-import {TutorEntity} from './../entities/tutors.entity';
-import {Tutor} from '../interfaces/tutors.interface';
+import {TeacherEntity} from '../entities/teachers.entity';
+import {Teacher} from '../interfaces/teachers.interface';
 import {Course} from "../interfaces/courses.interface";
 import {AppDataSource} from "../config/data-source";
 import {CourseEntity} from "../entities/courses.entity";
@@ -48,7 +48,7 @@ class CoursesService {
         const findLevel: Level = await LevelEntity.findOne({where: {level_id: Number(courseData.level_id)}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: Number(courseData.tutor_id)}});
+        const findTutor: Teacher = await TeacherEntity.findOne({where: {tutor_id: Number(courseData.tutor_id)}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         const createCourseData: Course = await CourseEntity.create({
@@ -69,7 +69,7 @@ class CoursesService {
         const findLevel: Level = await LevelEntity.findOne({where: {level_id: courseData.level_id}});
         if (!findLevel) throw new HttpException(409, "Level doesn't exist");
 
-        const findTutor: Tutor = await TutorEntity.findOne({where: {tutor_id: courseData.tutor_id}});
+        const findTutor: Teacher = await TeacherEntity.findOne({where: {tutor_id: courseData.tutor_id}});
         if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
 
         await CourseEntity.update(courseId, {...courseData});

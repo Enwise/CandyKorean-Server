@@ -1,7 +1,7 @@
 import {IsNumber, IsString} from "class-validator";
 import {Type} from "class-transformer";
 
-export class CreateTutorDto {
+export class CreateTeacherDto {
     @Type(()=>Number)
     @IsNumber()
     public user_id: number;

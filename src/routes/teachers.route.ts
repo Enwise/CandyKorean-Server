@@ -1,13 +1,13 @@
 import {Routes} from "../interfaces/router.interfaces";
 import {Router} from "express";
-import TutorsController from "../controllers/tutors.controller";
+import TeachersController from "../controllers/teachers.controller";
 import validationMiddleware from "../middlewares/validation.middleware";
-import {CreateTutorDto} from "../dtos/tutors.dto";
+import {CreateTeacherDto} from "../dtos/teachers.dto";
 
-class TutorsRoute implements Routes {
+class TeachersRoute implements Routes {
     public path = '/tutor';
     public router = Router();
-    public tutorsController = new TutorsController();
+    public tutorsController = new TeachersController();
 
     constructor() {
         this.initializeRoutes();
@@ -16,10 +16,10 @@ class TutorsRoute implements Routes {
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.tutorsController.getTutors);
         this.router.get(`${this.path}/:id(\\d+)`, this.tutorsController.getTutorById);
-        this.router.post(`${this.path}`, validationMiddleware(CreateTutorDto, 'body'), this.tutorsController.createTutor);
-        this.router.put(`${this.path}/:id(\\d+)`,validationMiddleware(CreateTutorDto,'body'),this.tutorsController.updateTutor);
+        this.router.post(`${this.path}`, validationMiddleware(CreateTeacherDto, 'body'), this.tutorsController.createTutor);
+        this.router.put(`${this.path}/:id(\\d+)`,validationMiddleware(CreateTeacherDto,'body'),this.tutorsController.updateTutor);
         this.router.delete(`${this.path}/:id(\\d+)`,this.tutorsController.deleteTutor);
     }
 }
 
-export default TutorsRoute;
+export default TeachersRoute;

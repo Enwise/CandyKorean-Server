@@ -1,14 +1,14 @@
-import TutorsService from "../services/tutors.service";
+import TeachersService from "../services/teachers.service";
 import {NextFunction, Request, Response} from "express";
-import {Tutor} from "../interfaces/tutors.interface";
-import {CreateTutorDto} from "../dtos/tutors.dto";
+import {Teacher} from "../interfaces/teachers.interface";
+import {CreateTeacherDto} from "../dtos/teachers.dto";
 
-class TutorsController {
-    public tutorService = new TutorsService;
+class TeachersController {
+    public tutorService = new TeachersService;
 
     public getTutors = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const findAllTutorsData: Tutor[] = await this.tutorService.findAllTutors();
+            const findAllTutorsData: Teacher[] = await this.tutorService.findAllTeachers();
 
             res.status(200).json({data: findAllTutorsData, message: 'findAll'});
         } catch (error) {
@@ -19,7 +19,7 @@ class TutorsController {
     public getTutorById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const tutorId = Number(req.params.id);
-            const findOneTutorData: Tutor = await this.tutorService.findTutorById(tutorId);
+            const findOneTutorData: Teacher = await this.tutorService.findTeacherById(tutorId);
 
             res.status(200).json({data: findOneTutorData, message: 'findOne'});
         } catch (error) {
@@ -29,8 +29,8 @@ class TutorsController {
 
     public createTutor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const tutorData: CreateTutorDto = req.body;
-            const createTutorData: Tutor = await this.tutorService.createTutor(tutorData);
+            const tutorData: CreateTeacherDto = req.body;
+            const createTutorData: Teacher = await this.tutorService.createTeacher(tutorData);
 
             res.status(201).json({data: createTutorData, message: 'created'});
         } catch (error) {
@@ -41,8 +41,8 @@ class TutorsController {
     public updateTutor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const tutorId = Number(req.params.id);
-            const tutorData: CreateTutorDto = req.body;
-            const updateTutorData: Tutor = await this.tutorService.updateTutor(tutorId, tutorData);
+            const tutorData: CreateTeacherDto = req.body;
+            const updateTutorData: Teacher = await this.tutorService.updateTutor(tutorId, tutorData);
 
             res.status(200).json({data: updateTutorData, message: 'updated'});
         } catch (error) {
@@ -53,7 +53,7 @@ class TutorsController {
     public deleteTutor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const tutorId = Number(req.params.id);
-            const deleteTutorData: Tutor = await this.tutorService.deleteTutor(tutorId);
+            const deleteTutorData: Teacher = await this.tutorService.deleteTutor(tutorId);
 
             res.status(200).json({data: deleteTutorData, message: 'deleted'});
         } catch (error) {
@@ -62,4 +62,4 @@ class TutorsController {
     }
 }
 
-export default TutorsController;
+export default TeachersController;
