@@ -76,4 +76,7 @@ export class CourseEntity extends BaseEntity implements Course {
 
   @Column()
   is_can_add_slide: boolean;
+
+  @Column()
+  is_for_sale: boolean;
 }
