@@ -1,4 +1,4 @@
-import { Teacher } from "./teachers.interface";
+import { Tutor } from "./tutors.interface";
 import { Level } from "./levels.interfaces";
 import {Column} from "typeorm";
 
@@ -11,7 +11,7 @@ export interface Course {
   view_count: number;
   date_created: Date;
   date_updated: Date;
-  tutor: Teacher;
+  tutor: Tutor;
   level: Level;
   thumbnail: string;
   is_premium: boolean;

@@ -4,8 +4,8 @@ import {LevelEntity} from "../entities/levels.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateLevelDto} from "../dtos/levels.dto";
-import {Teacher} from "../interfaces/teachers.interface";
-import {TeacherEntity} from "../entities/teachers.entity";
+import {Tutor} from "../interfaces/tutors.interface";
+import {TutorEntity} from "../entities/tutors.entity";
 
 class LevelsService {
     public async findAllLevels(): Promise<Level[]> {

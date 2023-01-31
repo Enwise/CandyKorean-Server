@@ -1,4 +1,4 @@
-import {Teacher} from "./teachers.interface";
+import {Tutor} from "./tutors.interface";
 
 export interface Level {
     level_id: number,

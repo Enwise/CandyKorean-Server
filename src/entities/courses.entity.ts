@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Course } from "../interfaces/courses.interface";
-import { TeacherEntity } from "./teachers.entity";
+import { TutorEntity } from "./tutors.entity";
 import { LevelEntity } from "./levels.entity";
 import { ClassesEntity } from "./classes.entity";
 import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
@@ -55,8 +55,8 @@ export class CourseEntity extends BaseEntity implements Course {
   is_premium: boolean;
 
   @JoinColumn({ name: "tutor_id" })
-  @ManyToOne(() => TeacherEntity)
-  tutor: TeacherEntity;
+  @ManyToOne(() => TutorEntity)
+  tutor: TutorEntity;
 
   @JoinColumn({ name: "level_id" })
   @ManyToOne(() => LevelEntity)

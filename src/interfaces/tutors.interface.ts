@@ -1,6 +1,6 @@
 import {User} from "./users.interface";
 
-export interface Teacher {
+export interface Tutor {
     tutor_id: number;
     name: string;
     enabled: boolean;
