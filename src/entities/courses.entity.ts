@@ -6,7 +6,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -74,4 +73,10 @@ export class CourseEntity extends BaseEntity implements Course {
 
   @OneToMany(() => WishListEntity, (wishlist) => wishlist.course)
   wishlists: WishListEntity[]
+
+  @Column()
+  is_can_add_slide: boolean;
+
+  @Column()
+  is_for_sale: boolean;
 }

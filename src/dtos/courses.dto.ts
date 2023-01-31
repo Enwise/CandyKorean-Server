@@ -32,5 +32,13 @@ export class CreateCourseDto {
 
   @Transform(({ value} ) => value === 'true')
   @IsBoolean()
-  is_premium: boolean
+  is_premium: boolean;
+
+  @Transform(({ value} ) => value === 'true')
+  @IsBoolean()
+  is_can_add_slide: boolean;
+
+  @Transform(({ value} ) => value === 'true')
+  @IsBoolean()
+  is_for_sale: boolean;
 }
