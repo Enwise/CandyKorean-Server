@@ -21,7 +21,7 @@ class LearnedClassesController {
         try {
             const findPremiumLearnedClasses: LearnedClasses[] = await this.learnedClassesService.findPremiumLearnedClass();
 
-            res.status(200).json({data: findPremiumLearnedClasses, message: 'findAll'});
+            res.status(200).json({data: findPremiumLearnedClasses, message: 'findOne'});
         } catch (error) {
             next(error);
         }
@@ -32,7 +32,7 @@ class LearnedClassesController {
             const learnedClassData: CreateLearnedClassDto = req.body;
             const createLearnedClassData: LearnedClasses = await this.learnedClassesService.createLearnedClass(learnedClassData);
 
-            res.status(200).json({data: createLearnedClassData, message: 'findAll'});
+            res.status(201).json({data: createLearnedClassData, message: 'created'});
         } catch (error) {
             next(error);
         }
@@ -43,7 +43,7 @@ class LearnedClassesController {
             const learnedClassData: CreateLearnedClassDto = plainToInstance(CreateLearnedClassDto,req.body);
             const updateLearnedClassData: LearnedClasses = await this.learnedClassesService.updateLearnedClass(learnedClassData);
 
-            res.status(200).json({data: updateLearnedClassData, message: 'findAll'});
+            res.status(200).json({data: updateLearnedClassData, message: 'updated'});
         } catch (error) {
             next(error);
         }

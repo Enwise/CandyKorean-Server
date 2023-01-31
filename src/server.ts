@@ -16,6 +16,7 @@ import WishlistRoute from "./routes/wishlist.route";
 import NoticeRoute from "./routes/notice.route";
 import FeedbackRoute from "./routes/feedback.route";
 import AttendanceRoute from "./routes/attendance.route";
+import TeacherRoute from "./routes/teacher.route";
 
 const app = new App([
     new UsersRoute(),
@@ -34,7 +35,8 @@ const app = new App([
     new WishlistRoute(),
     new NoticeRoute(),
     new FeedbackRoute(),
-    new AttendanceRoute()
+    new AttendanceRoute(),
+    new TeacherRoute()
 ]);
 
 app.listen()
