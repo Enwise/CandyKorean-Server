@@ -8,7 +8,7 @@ class TeacherController {
 
     public getAllTeachers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const findAllTeachers = this.teacherService.findAllTeachers();
+            const findAllTeachers = await this.teacherService.findAllTeachers();
 
             res.status(200).json({data: findAllTeachers, message: 'findAll'});
         } catch (error) {
@@ -19,7 +19,7 @@ class TeacherController {
     public getTeacherById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const teacherId = Number(req.params.id);
-            const findTeacher = this.teacherService.findTeacherById(teacherId);
+            const findTeacher = await this.teacherService.findTeacherById(teacherId);
 
             res.status(200).json({data: findTeacher, message: 'findOne'});
         } catch (error) {
@@ -30,7 +30,7 @@ class TeacherController {
     public createTeacher = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const teacherData = plainToInstance(CreateTeacherDto, req.body);
-            const createTeacher = this.teacherService.createTeacher(teacherData);
+            const createTeacher = await this.teacherService.createTeacher(teacherData);
 
             res.status(201).json({data: createTeacher, message: 'created'});
         } catch (error) {
@@ -42,7 +42,7 @@ class TeacherController {
         try {
             const teacherId = Number(req.params.id);
             const teacherData = plainToInstance(CreateTeacherDto, req.body);
-            const updateTeacher = this.teacherService.updateTeacher(teacherId, teacherData);
+            const updateTeacher = await this.teacherService.updateTeacher(teacherId, teacherData);
 
             res.status(200).json({data: updateTeacher, message: 'updated'});
         } catch (error) {
@@ -53,7 +53,7 @@ class TeacherController {
     public deleteTeacher = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const teacherId = Number(req.params.id);
-            const deleteTeacher = this.teacherService.deleteTeacher(teacherId);
+            const deleteTeacher = await this.teacherService.deleteTeacher(teacherId);
 
             res.status(200).json({data: deleteTeacher, message: 'deleted'});
         } catch (error) {

@@ -1,7 +1,8 @@
-import {BaseEntity, Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {TutorEntity} from "./tutors.entity";
 import {Teacher} from "../interfaces/teacher.interface";
 
+@Entity('teacher')
 class TeacherEntity extends BaseEntity implements Teacher {
     @PrimaryGeneratedColumn()
     teacher_id: number;
