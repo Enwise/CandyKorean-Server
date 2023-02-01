@@ -15,7 +15,7 @@ class CoursesService {
             relations: {
                 level: true,
                 tutor: true
-            }, where: {is_premium: false}
+            }
         });
         return courses;
     }
