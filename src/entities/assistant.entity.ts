@@ -8,6 +8,12 @@ class AssistantEntity extends BaseEntity implements Assistant {
     assistant_id: number;
 
     @Column()
+    profile_url: string;
+
+    @Column()
+    name: string;
+
+    @Column()
     metaverse_url: string;
 
     @Column()

@@ -10,6 +10,10 @@ export class CreateLearnedClassDto {
     @IsBoolean()
     is_completed: boolean
 
+    @Transform(({ value} ) => value === 'true')
+    @IsBoolean()
+    is_purchased: boolean
+
     @Type(()=>Number)
     @IsNumber()
     user_id: number
