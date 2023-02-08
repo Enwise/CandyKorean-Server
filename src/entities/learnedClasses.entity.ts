@@ -20,6 +20,9 @@ export class LearnedClassesEntity extends BaseEntity implements LearnedClasses {
     @Column()
     learn_time: number
 
+    @Column()
+    is_purchased: boolean
+
     @CreateDateColumn()
     date_created: Date
 

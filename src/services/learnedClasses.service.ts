@@ -20,10 +20,16 @@ class LearnedClassesService {
         const learnedClasses: LearnedClasses[] = await LearnedClassesEntity
             .createQueryBuilder("learned_class")
             .select('learned_class.*')
-            .leftJoin("learned_class.class","class")
-            .leftJoin("class.course","course")
+            .leftJoin("learned_class.class", "class")
+            .leftJoin("class.course", "course")
             .where("course.is_premium = true")
             .getRawMany<LearnedClasses>();
+        return learnedClasses;
+    }
+
+    public async findLearnedClassByUserId(userId: number): Promise<LearnedClasses[]> {
+        const learnedClasses: LearnedClasses[] = await LearnedClassesEntity.find({where: {user_id: userId}});
+
         return learnedClasses;
     }
 

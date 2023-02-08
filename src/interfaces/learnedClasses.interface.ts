@@ -7,5 +7,6 @@ export interface LearnedClasses {
     learn_time: number,
     date_created: Date,
     date_updated: Date,
-    is_completed: boolean
+    is_completed: boolean,
+    is_purchased: boolean
 }
