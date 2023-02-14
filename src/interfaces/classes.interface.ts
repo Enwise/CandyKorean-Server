@@ -8,4 +8,5 @@ export interface Class {
   course: Course;
   thumbnail: string;
   unit: number;
+  is_metaverse: boolean;
 }

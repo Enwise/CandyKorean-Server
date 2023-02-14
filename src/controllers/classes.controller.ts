@@ -2,6 +2,7 @@ import ClassesService from "../services/classes.service";
 import {NextFunction, Request, Response} from "express";
 import {Class} from "../interfaces/classes.interface";
 import {CreateClassesDto} from "../dtos/classes.dto";
+import {plainToInstance} from "class-transformer";
 
 class ClassesController {
     public classesService = new ClassesService();
@@ -63,7 +64,7 @@ class ClassesController {
     public updateClass = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const classId = Number(req.params.id);
-            const classData: CreateClassesDto = req.body;
+            const classData: CreateClassesDto = plainToInstance(CreateClassesDto, req.body);
             const updateClassData: Class = await this.classesService.updateClass(classId, classData);
 
             res.status(200).json({data: updateClassData, message: 'updated'});

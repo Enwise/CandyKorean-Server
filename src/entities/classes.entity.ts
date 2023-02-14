@@ -42,4 +42,7 @@ export class ClassesEntity extends BaseEntity implements Class {
 
   @OneToMany(() => ContentsEntity, (contents) => contents.class_entity)
   contents: ContentsEntity[];
+
+  @Column()
+  is_metaverse: boolean;
 }
