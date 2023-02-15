@@ -7,5 +7,11 @@ export class CreateAssistantDto {
 
     @Type(()=>Number)
     @IsNumber()
-    public tutor_id: number
+    public course_id: number
+
+    @IsString()
+    public name: string
+
+    @IsString()
+    public profile_url: string
 }
