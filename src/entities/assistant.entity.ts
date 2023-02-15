@@ -1,6 +1,6 @@
 import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {TutorEntity} from "./tutors.entity";
 import {Assistant} from "../interfaces/assistant.interface";
+import {CourseEntity} from "./courses.entity";
 
 @Entity('assistant')
 class AssistantEntity extends BaseEntity implements Assistant {
@@ -17,11 +17,11 @@ class AssistantEntity extends BaseEntity implements Assistant {
     metaverse_url: string;
 
     @Column()
-    tutor_id: number;
+    course_id: number;
 
-    @JoinColumn({ name: "tutor_id" })
-    @ManyToOne(() => TutorEntity)
-    tutor: TutorEntity;
+    @JoinColumn({ name: "course_id" })
+    @ManyToOne(() => CourseEntity)
+    course: CourseEntity;
 }
 
 export default AssistantEntity;

@@ -16,6 +16,7 @@ class AssistantRoute implements Routes {
     private initializeRoutes() {
         this.router.get(`${this.path}`, this.assistantController.getAllAssistants);
         this.router.get(`${this.path}/:id(\\d+)`, this.assistantController.getAssistantById);
+        this.router.get(`${this.path}/course/:id(\\d+)`, this.assistantController.getAssistantsByCourseId);
         this.router.post(`${this.path}`, validationMiddleware(CreateAssistantDto, 'body'), this.assistantController.createAssistant);
         this.router.put(`${this.path}/:id(\\d+)`,validationMiddleware(CreateAssistantDto,'body'),this.assistantController.updateAssistant);
         this.router.delete(`${this.path}/:id(\\d+)`,this.assistantController.deleteAssistant);

@@ -27,6 +27,17 @@ class AssistantController {
         }
     }
 
+    public getAssistantsByCourseId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const courseId = Number(req.params.id);
+            const findAssistants = await this.assistantService.findAssistantsByCourseId(courseId);
+
+            res.status(200).json({data: findAssistants, message: 'find'});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public createAssistant = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const assistantData = plainToInstance(CreateAssistantDto, req.body);
