@@ -16,8 +16,17 @@ class AssistantService {
         if (isEmpty(assistantId)) throw new HttpException(400, "assistantId is empty");
         const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {course: true}});
 
-        if (!findAssistant) throw new HttpException(409, "Teacher doesn't exist");
+        if (!findAssistant) throw new HttpException(409, "Assistant doesn't exist");
         return findAssistant;
+    }
+
+    public async findAssistantsByCourseId(courseId: number): Promise<Assistant[]> {
+        if (isEmpty(courseId)) throw new HttpException(400, "courseId is empty");
+
+        const findAssistants = await AssistantEntity.find({where: {course_id: courseId}, relations: {course: true}});
+        if (!findAssistants) throw new HttpException(409, "Assistant doesn't exist");
+
+        return findAssistants;
     }
 
     public async createAssistant(assistantData: CreateAssistantDto): Promise<Assistant> {
