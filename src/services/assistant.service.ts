@@ -3,8 +3,8 @@ import AssistantEntity from "../entities/assistant.entity";
 import {isEmpty} from "../utils/util";
 import {HttpException} from "../exceptions/HttpException";
 import {CreateAssistantDto} from "../dtos/assistant.dto";
-import {TutorEntity} from "../entities/tutors.entity";
 import {Assistant} from "../interfaces/assistant.interface";
+import {CourseEntity} from "../entities/courses.entity";
 
 class AssistantService {
     public async findAllAssistants(): Promise<Assistant[]> {
@@ -14,7 +14,7 @@ class AssistantService {
 
     public async findAssistantById(assistantId: number): Promise<Assistant> {
         if (isEmpty(assistantId)) throw new HttpException(400, "assistantId is empty");
-        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {tutor: true}});
+        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {course: true}});
 
         if (!findAssistant) throw new HttpException(409, "Teacher doesn't exist");
         return findAssistant;
@@ -23,8 +23,8 @@ class AssistantService {
     public async createAssistant(assistantData: CreateAssistantDto): Promise<Assistant> {
         if (isEmpty(assistantData)) throw new HttpException(400, "assistantData is empty");
 
-        const findTutor = await TutorEntity.findOne({where: {tutor_id: assistantData.tutor_id}});
-        if (!findTutor) throw new HttpException(409, "Tutor doesn't exist");
+        const findCourse = await CourseEntity.findOne({where:{course_id:assistantData.course_id}});
+        if (!findCourse) throw new HttpException(400,"Course doesn't exist");
 
         const createAssistantData: Assistant = await AssistantEntity.create({...assistantData}).save();
         return createAssistantData;
@@ -34,14 +34,14 @@ class AssistantService {
         if (isEmpty(assistantId)) throw new HttpException(400, "assistantId is empty");
         if (isEmpty(assistantData)) throw new HttpException(400, "assistantData is empty");
 
-        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {tutor: true}});
+        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {course: true}});
         if (!findAssistant) throw new HttpException(409, "Assistant doesn't exist");
 
         await AssistantEntity.update(assistantId, {...assistantData});
 
         const updateAssistantData: Assistant = await AssistantEntity.findOne({
             where: {assistant_id: assistantId},
-            relations: {tutor: true}
+            relations: {course: true}
         });
         return updateAssistantData;
     }
@@ -49,7 +49,7 @@ class AssistantService {
     public async deleteAssistant(assistantId: number): Promise<Assistant> {
         if (isEmpty(assistantId)) throw new HttpException(400, "assistantId is empty");
 
-        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {tutor: true}});
+        const findAssistant = await AssistantEntity.findOne({where: {assistant_id: assistantId}, relations: {course: true}});
         if (!findAssistant) throw new HttpException(409, "Teacher doesn't exist");
 
         await AssistantEntity.delete(assistantId);
