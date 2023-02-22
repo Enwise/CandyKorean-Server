@@ -3,18 +3,19 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  JoinColumn, ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
+} from 'typeorm'
 import { Course } from "../interfaces/courses.interface";
 import { TutorEntity } from "./tutors.entity";
 import { LevelEntity } from "./levels.entity";
 import { ClassesEntity } from "./classes.entity";
 import { PurchasedCoursesEntity } from "./purchasedCourses.entity";
 import {WishListEntity} from "./wishlist.entity";
+import AssistantEntity from './assistant.entity'
 
 @Entity("course")
 export class CourseEntity extends BaseEntity implements Course {
@@ -73,6 +74,9 @@ export class CourseEntity extends BaseEntity implements Course {
 
   @OneToMany(() => WishListEntity, (wishlist) => wishlist.course)
   wishlists: WishListEntity[]
+
+  @ManyToMany(() => AssistantEntity )
+  assistant: AssistantEntity[]
 
   @Column()
   is_can_add_slide: boolean;

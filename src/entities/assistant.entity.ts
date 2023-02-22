@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import {Assistant} from "../interfaces/assistant.interface";
 import {CourseEntity} from "./courses.entity";
 
@@ -20,7 +20,7 @@ class AssistantEntity extends BaseEntity implements Assistant {
     course_id: number;
 
     @JoinColumn({ name: "course_id" })
-    @ManyToOne(() => CourseEntity)
+    @ManyToMany(() => CourseEntity)
     course: CourseEntity;
 }
 

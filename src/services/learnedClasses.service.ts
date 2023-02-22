@@ -28,7 +28,7 @@ class LearnedClassesService {
     }
 
     public async findLearnedClassByUserId(userId: number): Promise<LearnedClasses[]> {
-        const learnedClasses: LearnedClasses[] = await LearnedClassesEntity.find({where: {user_id: userId}});
+        const learnedClasses: LearnedClasses[] = await LearnedClassesEntity.find({where: {user_id: userId},relations:{class: true}});
 
         return learnedClasses;
     }
