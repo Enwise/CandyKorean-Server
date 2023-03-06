@@ -75,8 +75,8 @@ export class CourseEntity extends BaseEntity implements Course {
   @OneToMany(() => WishListEntity, (wishlist) => wishlist.course)
   wishlists: WishListEntity[]
 
-  @ManyToMany(() => AssistantEntity )
-  assistant: AssistantEntity[]
+  @ManyToMany(() => AssistantEntity, (assistant) => assistant.courses)
+  assistants: AssistantEntity[]
 
   @Column()
   is_can_add_slide: boolean;

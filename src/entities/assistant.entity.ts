@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    ManyToOne,
+    PrimaryGeneratedColumn
+} from 'typeorm'
 import {Assistant} from "../interfaces/assistant.interface";
 import {CourseEntity} from "./courses.entity";
 
@@ -16,12 +25,9 @@ class AssistantEntity extends BaseEntity implements Assistant {
     @Column()
     metaverse_url: string;
 
-    @Column()
-    course_id: number;
-
-    @JoinColumn({ name: "course_id" })
-    @ManyToMany(() => CourseEntity)
-    course: CourseEntity;
+    @ManyToMany(() => CourseEntity, (course) => course.assistants)
+    @JoinTable()
+    courses: CourseEntity[];
 }
 
 export default AssistantEntity;
