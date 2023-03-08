@@ -42,4 +42,7 @@ export class LearnedClassesEntity extends BaseEntity implements LearnedClasses {
     @JoinColumn({name:"class_id"})
     @ManyToOne(()=>ClassesEntity)
     class: ClassesEntity
+
+    @Column({default: null})
+    assistant_id: number
 }
