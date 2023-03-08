@@ -21,4 +21,8 @@ export class CreateLearnedClassDto {
     @Type(()=>Number)
     @IsNumber()
     class_id: number
+
+    @Type(()=>Number)
+    @IsNumber()
+    assistant_id: number
 }
