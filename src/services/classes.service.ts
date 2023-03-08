@@ -26,7 +26,7 @@ class ClassesService {
     if (isEmpty(courseId)) throw new HttpException(400, 'classId is empty')
 
     const findClasses: Class[] = await ClassesEntity.find({
-      where: { course_id: courseId, is_metaverse: false },
+      where: { course_id: courseId},
       relations: { course: true },
       order: { unit: 'ASC' }
     })
@@ -40,7 +40,7 @@ class ClassesService {
 
     const count = await ClassesEntity
       .createQueryBuilder('class')
-      .where('class.course_id= :courseId', { courseId: courseId })
+      .where('class.course_id= :courseId and class.is_metaverse= :is_metaverse', { courseId: courseId, is_metaverse:false })
       .getCount()
     return count
   }
