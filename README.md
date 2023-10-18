@@ -153,30 +153,42 @@ try {
 ```javascript
 ...
 ...
-buildscript {
-    ext {
-        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '31.0.0'
-        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
-        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
-        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '31')
-        if (findProperty('android.kotlinVersion')) {
-            kotlinVersion = findProperty('android.kotlinVersion')
-        }
-        frescoVersion = findProperty('expo.frescoVersion') ?: '2.5.0'
+android {
+    ndkVersion rootProject.ext.ndkVersion
 
-        if (System.properties['os.arch'] == 'aarch64') {
-            // For M1 Users we need to use the NDK 24 which added support for aarch64
-            ndkVersion = '24.0.8215888'
-        } else {
-            // Otherwise we default to the side-by-side NDK version from AGP.
-            ndkVersion = '21.4.7075529'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId 'com.candykorean.candykoreanapp'
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 42
+        versionName "1.0.3"
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+        // missingDimensionStrategy "store", "play"
+
+        if (isNewArchitectureEnabled()) {
+            // We configure the CMake build only if you decide to opt-in for the New Architecture.
+            externalNativeBuild {
+                cmake {
+                    arguments "-DPROJECT_BUILD_DIR=$buildDir",
+                        "-DREACT_ANDROID_DIR=${reactNativeRoot}/ReactAndroid",
+                        "-DREACT_ANDROID_BUILD_DIR=${reactNativeRoot}/ReactAndroid/build",
+                        "-DNODE_MODULES_DIR=$rootDir/../node_modules",
+                        "-DANDROID_STL=c++_shared"
+                }
+            }
+            if (!enableSeparateBuildPerCPUArchitecture) {
+                ndk {
+                    abiFilters (*reactNativeArchitectures())
+                }
+            }
         }
-        // supportLibVersion = '28.0.0'
     }
 ...
 ...
 ```
-*build.gradle -> buildscript 코드 블럭 수정*
+*build.gradle -> android 코드 블럭 내 compiledSdkVersion 추가*
 
 ## Google Play Store URL
 - https://play.google.com/store/apps/details?id=com.candykorean.candykoreanapp&hl=ko
