@@ -147,8 +147,36 @@ try {
 
 ![image](https://github.com/Enwise/CandyKorean-Server/assets/49470452/08892fb6-cbba-4d36-ae4e-af7602cde3e1)  
 *Expo EAS Build Error*
-- `Plugin with id 'maven' not found.` : 
-- `compiledSdkVersion is not specified` : 
+- `Plugin with id 'maven' not found.` : `maven plugin`이 제거되어, `maven-publish` 플러그인을 대신 사용하도록 코드를 수정하였습니다. -> `apply plugin: maven-publish` 코드를 적용
+
+- `compiledSdkVersion is not specified` : `build.gradle` 의 `buildscript` 블럭 내의 코드를 수정하였습니다.
+```javascript
+...
+...
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '31.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '31')
+        if (findProperty('android.kotlinVersion')) {
+            kotlinVersion = findProperty('android.kotlinVersion')
+        }
+        frescoVersion = findProperty('expo.frescoVersion') ?: '2.5.0'
+
+        if (System.properties['os.arch'] == 'aarch64') {
+            // For M1 Users we need to use the NDK 24 which added support for aarch64
+            ndkVersion = '24.0.8215888'
+        } else {
+            // Otherwise we default to the side-by-side NDK version from AGP.
+            ndkVersion = '21.4.7075529'
+        }
+        // supportLibVersion = '28.0.0'
+    }
+...
+...
+```
+*build.gradle -> buildscript 코드 블럭 수정*
 
 ## Google Play Store URL
 - https://play.google.com/store/apps/details?id=com.candykorean.candykoreanapp&hl=ko
